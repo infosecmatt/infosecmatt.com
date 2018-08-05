@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Matt Johnson</title>
+        <link href='style.css' media='screen' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
+        <link rel="shortcut icon" href="img/logo.PNG" type="image/x-icon">
+        <link rel="icon" href="img/logo.PNG" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:500" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <div class='nav'>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog/main.html">Blog</a></li>
+                <li><a href="resume.pdf" target="_blank">Resume</a></li>
+            </ul>
+        </div>
+        <div class='header'>
+            <a href="https://mattejohnson.com/"><img src="img/head.PNG" alt="matt johnson" ></a>
+            <hr>
+        </div>  
+        <br>
+        <div class="home">
+            <div class="homecolumn">
+                <div class="swiper-container">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide" >
+                            <img src="img/me.jpg" alt="portrait of me" >
+                        </div>
+                        <div class="swiper-slide" >
+                            <img src="img/familia.JPG" alt="me, my family, and a giraffe" >
+                        </div>
+                        <div class="swiper-slide" >
+                            <img src="img/me%20and%20friends.JPG" alt="chicken, egg, avocado, and fruits">
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+            <div class="homecolumn">
+                <h2 style="color: #600; text-align: left; font-size: 32px; padding: 0;">Howdy!</h2>
+                <p>My name is Matt Johnson. I am a student at Texas A&M University pursuing an undergraduate and master's degree in Management Information Systems. I love learning about technology and how it can be used to make our lives easier and more efficient. I've lived in Texas for a majority of my life, and am currently living in Sweden, though I'll only be here for a few months. I love to travel and experience different foods and ways of life. I also love making music. I've played a variety of instruments throughout my life, but mostly stick to playing guitar now. I have <a href="https://www.instagram.com/p/BjvPT7_hm-y/?taken-by=immattjohnson">three great dogs</a>. They're all a little bit weird, but I love them anyways. My biggest accomplishment is that I once won trivia night at a local bar.</p>
+            </div>
+        </div>
+        <h2 style="font-size: 32px;"><a href="mailto:me@mattejohnson.com">Interested in reaching out to me?</a></h2>
+        <div class='footer'>      
+            <p>
+                <a href="https://instagram.com/immattjohnson" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/johnsonmatte/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/mattejohnson" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:me@mattejohnson.com"><i class="far fa-envelope"></i></a>
+            </p>
+            <p style="color:white; font-size:12px;">Copyright Matt Johnson, 2018</p>
+        </div>
+        
+        <!--JAVASCRIPT-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js"></script>
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+            spaceBetween: 30,
+            centeredSlides: true,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            });
+        </script>
+    </body>
+</html>
