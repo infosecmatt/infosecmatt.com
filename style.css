@@ -181,8 +181,14 @@ body .post img {
 body .footer {
     background-color: #333;
     width:auto;
-    height:100px;
+    height:120px;
     padding-top: 10px;}
+body .footer a {
+    color: #fff;
+    text-decoration: none;}
+body a:hover {
+    color: #A8DADC;
+    transition: .25s;}
 body .footer i {
     font-size: 36px;
     color: white;
