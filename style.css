@@ -79,37 +79,27 @@ body .footer {
 body .footer p {
     font-size: 12px;}
 
-/*MOBILE*/
-@media screen and (max-width: 640px) {
+/*4K Monitors*/
+@media screen and (min-width: 2560px) {
 body h2 {
-    font-size: 24px;
-    padding: 0px 5%;}
+    font-size: 80px;}
 body h3 {
-    font-size: 18px;
-    padding: 0px 10%;
-    line-height: 1.25}
-body hr {
-    width: 20%;}
+    font-size: 48px;}
 body i {
-    font-size: 28px;}
+    font-size: 60px;}
+body p {
+    font-size: 40px;}
     
 /*HEADER*/
 body .header {
-    height: 20vh;}
+    height: 25vh;}
 body .header img {
     padding-left: 4%;
-    width: 85vw;}
+    width: 40vw;}
     
 /*HOME*/
 body .home {
-    min-height: 80vh;}
-
-/*BIO*/
-body .bio {
-    padding: 0 2.5%;}
-body .biocolumn {
-    float: left;
-    width: 100%;}
+    min-height: 75vh;}
     
 /*FOOTER*/
 body .footer p {
@@ -152,28 +142,37 @@ body .footer p {
     font-size: 10px;}
 }
 
-/*4K Monitors*/
-/*TABLET*/
-@media screen and (min-width: 2560px) {
+/*MOBILE*/
+@media screen and (max-width: 640px) {
 body h2 {
-    font-size: 80px;}
+    font-size: 24px;
+    padding: 0px 5%;}
 body h3 {
-    font-size: 48px;}
+    font-size: 18px;
+    padding: 0px 10%;
+    line-height: 1.25}
+body hr {
+    width: 20%;}
 body i {
-    font-size: 60px;}
-body p {
-    font-size: 40px;}
+    font-size: 28px;}
     
 /*HEADER*/
 body .header {
-    height: 25vh;}
+    height: 20vh;}
 body .header img {
     padding-left: 4%;
-    width: 40vw;}
+    width: 85vw;}
     
 /*HOME*/
 body .home {
-    min-height: 75vh;}
+    min-height: 80vh;}
+
+/*BIO*/
+body .bio {
+    padding: 0 2.5%;}
+body .biocolumn {
+    float: left;
+    width: 100%;}
     
 /*FOOTER*/
 body .footer p {
