@@ -3,7 +3,10 @@ body {
     margin: auto;
     background-color: #f9f9f9;
     color: #373737;
-    font-family: 'Work Sans', sans-serif;}
+    font-family: 'Work Sans', sans-serif;
+    animation-name: fadein;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;}
 body h2 {
     font-family: 'Montserrat', sans-serif;
     color: #1c1c1c;
@@ -19,7 +22,7 @@ body h3 {
     padding: 0px 18%;}
 body p {
     font-family: 'Work Sans', sans-serif;
-    font-size: 17px;
+    font-size: 16px;
     margin: 5px 0 10px 10px;
     padding: 5px 10% 5px 10%; 
     text-align: center;
@@ -31,17 +34,16 @@ body hr {
 body a {
     color: #600;
     text-decoration: none;
-    transition:.25s;}
+    transition:.2s;}
 body a:hover {
     color: #A8DADC;
-    transition: .25s;}
+    transition: .2s;}
 body i {
     font-size: 36px;
     display: inline-block;
     text-align: center;
     width: auto;
-    padding-left: 3%;
-    padding-right: 3%;}
+    padding: 0 3%;}
 
 /*HEADER*/
 body .header {
@@ -51,35 +53,68 @@ body .header img {
     display: block;
     margin: 20px auto 20px auto;
     padding-left: 2%;
-    max-width: 35%;}
+    width: 35vw;}
 
 /*HOME CONTENT*/
 body .home {
-    min-height: 75vh;
-    margin: 0 0 0 auto;
-    padding-bottom: 50px;}
+    min-height: 75vh;}
+
+/*BIO*/
+body .bio {
+    min-height: 93vh;
+    padding: 2vh 10% 0 10%;}
+body .bio p {
+    text-align: left;}
+body .bio:after {
+    content: "";
+    display: table;
+    clear: both;}
+body .biocolumn {
+    float: left;
+    width: 50%;}
+/*FOOTER*/
+body .footer {
+    height: 5vh;}
+body .footer p {
+    font-size: 12px;}
 
 /*MOBILE*/
 @media screen and (max-width: 640px) {
 body h2 {
     font-size: 24px;
-    text-align: center;
     padding: 0px 5%;}
+body h3 {
+    font-size: 18px;
+    padding: 0px 10%;}
 body hr {
     width: 20%;}
+body i {
+    font-size: 28px;}
+    
 /*HEADER*/
+body .header {
+    height: 20vh;}
 body .header img {
-    display: block;
-    margin: 20px auto 20px auto;
     padding-left: 4%;
-    max-width: 90%;}
+    width: 85vw;}
+    
 /*HOME*/
 body .home {
-    padding-left: 0;
-    padding-bottom: 0;}
-body .home p {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    margin: 5px 0 10px 0;
-    padding: 0px 5% 5px 5%; 
-    text-align: center;}}
+    min-height: 80vh;}
+
+/*BIO*/
+body .bio {
+    padding: 0 2.5%;}
+body .biocolumn {
+    float: left;
+    width: 100%;}
+    
+/*FOOTER*/
+body .footer p {
+    font-size: 10px;}
+}
+
+/*ANIMATIONS*/
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}}
