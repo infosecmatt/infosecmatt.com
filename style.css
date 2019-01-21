@@ -79,6 +79,56 @@ body .footer {
 body .footer p {
     font-size: 12px;}
 
+/*RESUME*/
+body .resume {
+    padding: 25px 10%;}
+body .resume h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #1c1c1c;
+    font-size: 32px;
+    font-weight:800;
+    text-align: center;}
+body .resume h2 {
+    font-family: 'Work Sans', sans-serif;
+    padding: 0;
+    color: #1c1c1c;
+    font-size: 24px;
+    font-weight:bold;}
+body .resume h3 {
+    font-family: 'Work Sans', sans-serif;
+    padding: 0;
+    color: #1c1c1c;
+    font-size: 22px;}
+body .resume hr {
+    width: 80%;}
+body .resume ul {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    padding-left: 75px; 
+    line-height: 1.75;}
+body .resumehead h1{
+    text-align: center;}
+body .resumesection {
+    padding: 50px 10%;}
+body .resumesection:after {
+    content: "";
+    display: table;
+    clear: both;}
+body .resumesection hr {
+    width: 100%;}
+body .leftcolumn {
+    float:left;
+    width: 75%;}
+body .leftcolumn h2, .leftcolumn h3, .leftcolumn ul {
+    text-align: left;}
+body .rightcolumn {
+    float:left;
+    width: 25%;}
+body .rightcolumn h2 {
+    text-align: right;}
+body .rightcolumn h3 {
+    text-align: right;}
+
 /*4K Monitors*/
 @media screen and (min-width: 2560px) {
 body h2 {
