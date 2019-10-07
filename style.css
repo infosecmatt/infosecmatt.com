@@ -23,8 +23,8 @@ body h3 {
     line-height: 1.5;}
 body p {
     font-family: 'Work Sans', sans-serif;
-    font-size: 16px;
-    margin: 5px 0 10px 10px;
+    font-size: 15px;
+    margin: 5px 0 5px 10px;
     padding: 5px 10% 5px 10%; 
     text-align: center;
     display: block;
@@ -63,7 +63,8 @@ body .home {
 /*BIO*/
 body .bio {
     min-height: 93vh;
-    padding: 2vh 10% 0 10%;}
+    padding: 0 11% 0 11%;}
+
 body .bio p {
     text-align: left;}
 body .bio:after {
@@ -75,7 +76,8 @@ body .biocolumn {
     width: 50%;}
 /*FOOTER*/
 body .footer {
-    height: 5vh;}
+    height: 5vh;;
+}
 body .footer p {
     font-size: 12px;}
 
