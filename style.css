@@ -84,7 +84,7 @@ a:visited {
 }
 #footer a:hover {
     color: #A8DADC;
-    transition: .2s;
+    transition: .5s;
 }
 #publications {
     margin-top: 10px;
