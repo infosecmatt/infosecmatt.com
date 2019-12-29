@@ -1,6 +1,4 @@
-* {
-    
-}
+
 body {
     background-color: #000;
     color:white;
@@ -18,6 +16,21 @@ p {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
 }
+hr {
+    color:white;
+    width:75%;
+}
+i {
+    font-size: 36px;}
+ul {
+    text-align: center;
+    list-style: none;
+}
+li {
+    display: inline;
+    margin:4%;
+    text-align: center;
+}
 a {
     color:white;
     text-decoration: none;
@@ -25,49 +38,11 @@ a {
 a:visited {
     color:white;
 }
-/* CLASSES */
-.col {
-    border: 1px solid #fff;
-    height:90%;
-    margin:1%;
-    padding: 1%;
-    float:left;
-}
-.link {
-    padding:1%;
-    height: 15.75%;
-    vertical-align: middle;
-    text-align: left;
-}
-.link ul {
-    vertical-align: middle;
-    height: 100%;
-    line-height: 100%;
-}
-.link ul li{
-    display:inline;
-    vertical-align: middle;
-    padding: 2%;
-}
-.link:hover {
-    background-color: #fff;
-    color:black;
-    transition: .2s;
-}
-.link:hover i {
+i:hover {
     color: #A8DADC;
+    transition:.5s;
 }
-.link * {
-    line-height: 100%;
-    vertical-align: middle;
-}
-.link i {
-    font-size: 32px;
-}
-.link h3 {
-    display: inline;
-    font-size: 24px;
-}
+/* CLASSES */
 
 /* IDS */
 #header {
@@ -96,14 +71,15 @@ a:visited {
     color: #A8DADC;
 }
 #links {
-    float:right;
-    width:15%;
     font-family: 'Montserrat', sans-serif;
 }
 #terminal {
+    /* border: 1px solid #fff; */
+    /* height:90%; */
+    padding:1%;
     font-family: 'IBM Plex Mono', monospace;
     text-align: left;
-    float:left;
+    margin:auto;
     width:75%;
 }
 #terminal p {
@@ -112,7 +88,36 @@ a:visited {
 }
 #TerminalCommand {
     background-color: #000;
+    font-size: 16px;
     color:white;
     font-family: 'IBM Plex Mono', monospace;
     border: none;
 }
+
+/*TABLET*/
+@media screen and (max-width: 1025px) {
+    p {
+        font-size: 16px;
+    }
+    hr {
+        width: 95%;
+    }
+    #main {
+        height: 70vh;
+    }
+    #terminal {
+        width:90%;
+    }
+    #TerminalCommand {
+        font-size: 14px;
+    }
+    #terminal p {
+        font-size: 14px;
+    }
+}
+
+/*MOBILE*/
+@media screen and (max-width: 640px) {
+    
+}
+    
