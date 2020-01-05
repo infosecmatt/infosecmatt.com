@@ -23,8 +23,11 @@ hr {
 i {
     font-size: 36px;}
 ul {
+    width:100%;
     text-align: center;
     list-style: none;
+    margin: 0 auto;
+    padding:0;
 }
 li {
     display: inline;
@@ -38,7 +41,7 @@ a {
 a:visited {
     color:white;
 }
-i:hover {
+a:hover {
     color: #A8DADC;
     transition:.5s;
 }
@@ -49,6 +52,7 @@ i:hover {
     height:15vh;
 }
 #main {
+    width:100%;
     height: 70vh;
 }
 #footer {
@@ -109,15 +113,38 @@ i:hover {
         width:90%;
     }
     #TerminalCommand {
-        font-size: 14px;
+        font-size: 13px;
     }
     #terminal p {
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 
 /*MOBILE*/
 @media screen and (max-width: 640px) {
-    
+    h1 {
+        font-size: 30px;
+    }
+    p {
+        font-size: 14px;
+    }
+    i {
+        font-size: 24px;
+    }
+    #terminal p {
+        font-size: 12px;
+    }
+    #terminal {
+        display:block;
+        overflow: auto;
+        font-size: 12px;
+    }
+    #header {
+        margin-bottom: 10px;
+    }
+    #footer {
+        display:none;
+    }
+
 }
     
