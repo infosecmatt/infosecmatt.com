@@ -19,7 +19,6 @@
     <div id="main">
         <div id="links">
             <ul>
-                <li><a href="https://instagram.com/immattjohnson" target="_blank"><i class="fab fa-instagram"></i></a></li>
                 <li><a href="https://www.linkedin.com/in/johnsonmatte/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                 <li><a href="https://github.com/mattejohnson" target="_blank"><i class="fab fa-github"></i></a></li>
                 <li><a href="https://medium.com/@johnsonmatt" target="_blank"><i class="fab fa-medium"></i></a></li>
@@ -31,7 +30,7 @@
         <div id="terminal">
             <div id="commands">
                 <p>Available commands:  </p>
-                <p style="color:#A8DADC">bio&nbsp;&nbsp;&nbsp;&nbsp;publications&nbsp;&nbsp;&nbsp;&nbsp;contact</p>
+                <p style="color:#A8DADC">bio&nbsp;&nbsp;&nbsp;&nbsp;articles&nbsp;&nbsp;&nbsp;&nbsp;projects&nbsp;&nbsp;&nbsp;&nbsp;contact</p>
             </div>
             <br />
             <span style="color:rgb(124, 255, 2)">visitor@mattejohnson.com</span><span>:</span><span style="color:rgb(57, 110, 172)">~$ </span>
@@ -41,10 +40,14 @@
             <div id="bio" style="display:none;">
                 <p>Howdy, I’m Matt. I'm a native Texan, a security enthusiast, and a musician. I recently graduated from Texas A&amp;M University with a degree in Management Information Systems.</p>
                 <p>I had a pretty amazing college experience. I came in as a finance major, thought it was boring. I decided to switch to MIS, which I thought was much cooler. I got an on campus job, and ended up working with the incredible people at Texas A&M's Study Abroad Programs Office for a year and a half. I studied abroad in Jönköping, Sweden for a semester in the fall of 2018 and had a life changing experience. In all, I made lots of great memories with friends and classmates and learned a lot in the process.</p>
-                <p>As for security, it was during my IT advisory internship at Weaver that I first gained interest and experience in the field. In the time since, I've focused my efforts on honing my networking, penetration testing, and server configuration skills. I'm currently working on my Security+ certificate and hope to get my OSCP within the next two years.</p>
-                <p>Beyond security, my interests include music, lifting weights, and history. I speak both English and Portuguese, and am currently trying to learn German. If you're interested in getting to know me better, feel free to reach out! I'm always happy to talk.</p>
+                <p>As for security, it was during my IT advisory internship at Weaver that I first gained interest and experience in the field. In the time since, I've focused my efforts on honing my networking and security skills (red and blue team). I'm currently working on my Security+ certificate and hope to get my OSCP within the next two years.</p>
+                <p>Beyond security, my interests include playing guitar, lifting weights, and history. I speak both English and Portuguese, and am currently trying to learn German. If you're interested in getting to know me better, feel free to reach out! I'm always happy to talk.</p>
             </div>
-            <div id="publications" style="display:none;">
+            <div id="articles" style="display:none;">
+                <a href="https://medium.com/@johnsonmatt/hackthebox-bank-walkthrough-8b637ec6a0df">2020/01/29&nbsp;HackTheBox:&nbsp;Bank&nbsp;Walkthrough</a>
+                <br />
+                <a href="https://medium.com/@johnsonmatt/hackthebox-granny-grandpa-walkthrough-75983b34a92e">2020/01/29&nbsp;HackTheBox:&nbsp;Granny/Grandpa&nbsp;Walkthrough</a>
+                <br />
                 <a href="https://medium.com/@johnsonmatt/hackthebox-arctic-walkthrough-a81f1236ae66">2020/01/06&nbsp;HackTheBox:&nbsp;Arctic&nbsp;Walkthrough</a>
                 <br />
                 <a href="https://medium.com/@johnsonmatt/hackthebox-optimum-walkthrough-a18e608749e8">2020/01/02&nbsp;HackTheBox:&nbsp;Optimum&nbsp;Walkthrough</a>
@@ -52,6 +55,11 @@
                 <a href="https://medium.com/@johnsonmatt/hackthebox-beep-walkthrough-f48fc55aee51">2019/12/30&nbsp;HackTheBox:&nbsp;Beep&nbsp;Walkthrough</a>
                 <br />
                 <a href="https://medium.com/@johnsonmatt/hackthebox-devel-walkthrough-b24879aa6e76">2019/12/21&nbsp;HackTheBox:&nbsp;Devel&nbsp;Walkthrough</a>
+            </div>
+            <div id="projects" style="display:none;">
+                <p><a href="https://github.com/mattejohnson/Staged-Nmap-Scanner">Staged-Nmap-Scanner</a> : Bash : Performs a scanned nmap scan for a given IP address. Provides OS detection, version detection, and default script scan results.</p>
+                <p><a href="https://github.com/mattejohnson/NewJerseyCo">NewJerseyCo(Senior Capstone Project)</a> : ASP.NET,C#,MSSQL : Order and customer management application. Creates, logs, and retrieves records for orders, customers, and teams.</p>
+                <p><a href="https://github.com/mattejohnson/AprendaPortguesEuropeu">Aprenda Português Europeu</a> : ASP.NET,C#,MSSQL : Web application to assist with learning European Portuguese. Currently in early development phase, but will eventually be a full-featured app with an SRS-based vocabulary trainer, grammar exercises, articles, and more.</p>
             </div>
             <div id="contact" style="display:none;">
                 <p>To contact me you may email me at <a href="mailto:me@mattejohnson.com">me@mattejohnson.com</a> or send me a message on LinkedIn. I'd love to hear from you!</p>
@@ -61,7 +69,7 @@
         </div>
     </div>
     <div id="footer">
-        <p>Website made by Matt Johnson in 2019. Last updated 2019/12/28.</p>
+        <p>Website made by Matt Johnson in 2019. Last updated 2020/01/30.</p>
         <a href="https://github.com/mattejohnson/mattejohnson.github.io"><p>View source code</p></a>
     </div>
     <!-- SCRIPTS -->
@@ -87,18 +95,23 @@
         function TerminalCommand() {
             var cmd = document.getElementById("TerminalCommand");
             var bio = document.getElementById("bio");
-            var pubs = document.getElementById("publications");
+            var pubs = document.getElementById("articles");
+            var proj = document.getElementById("projects");
             var contact = document.getElementById("contact");
             var error = document.getElementById("error");
             bio.style.display = "none";
             pubs.style.display = "none";
+            proj.style.display = "none";
             contact.style.display = "none";
             error.style.display = "none";
                 if (cmd.value == "bio") {
                     bio.style.display = "block";
                 }
-                else if (cmd.value == "publications") {
+                else if (cmd.value == "articles") {
                     pubs.style.display = "block";
+                }
+                else if (cmd.value == "projects") {
+                    proj.style.display = "block";
                 }
                 else if (cmd.value == "contact") {
                     contact.style.display = "block";
