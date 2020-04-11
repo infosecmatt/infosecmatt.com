@@ -14,7 +14,7 @@
 <body onload="typeWriter();">
     <div id="header">
         <h1 id="sitename">mattejohnson.com</h1>
-        <p>Howdy, I'm Matt Johnson -- infosec enthusiast, guitarist of 10 years, and lover of ISO 8601.</p>
+        <p>Howdy, I'm Matt Johnson -- infosec professional, guitarist of 10 years, and wannabe hacker.</p>
     </div>
     <div id="main">
         <div id="links">
@@ -24,26 +24,35 @@
                 <li><a href="https://medium.com/@johnsonmatt" target="_blank"><i class="fab fa-medium"></i></a></li>
                 <li><a href="mailto:me@mattejohnson.com"><i class="far fa-envelope"></i></a></li>
             </ul>
-            <p><a href="MatthewJohnsonResume.pdf">View My Resume</a></p>
+            <p><a href="MattJohnsonResume.pdf">View My Resume</a></p>
         </div>
         <hr />
         <div id="terminal">
             <div id="commands">
                 <p>Available commands:  </p>
-                <p style="color:#A8DADC">bio&nbsp;&nbsp;&nbsp;&nbsp;articles&nbsp;&nbsp;&nbsp;&nbsp;projects&nbsp;&nbsp;&nbsp;&nbsp;contact</p>
+                <p style="color:#A8DADC">whoami&nbsp;&nbsp;&nbsp;&nbsp;articles&nbsp;&nbsp;&nbsp;&nbsp;projects&nbsp;&nbsp;&nbsp;&nbsp;contact</p>
             </div>
             <br />
             <span style="color:rgb(124, 255, 2)">visitor@mattejohnson.com</span><span>:</span><span style="color:rgb(57, 110, 172)">~$ </span>
             <input id="TerminalCommand" style="border:none" value="" onfocus="this.value = this.value;" autofocus>
             <br />
             
-            <div id="bio" style="display:none;">
-                <p>Howdy, I’m Matt. I'm a native Texan, a security enthusiast, and a musician. I recently graduated from Texas A&amp;M University with a degree in Management Information Systems.</p>
+            <div id="whoami" style="display:none;">
+                <p>Howdy, I’m Matt. I'm a native Texan, a security enthusiast, and a musician. I recently graduated from Texas A&amp;M University with a degree in Management Information Systems, and I'm now working as a cybersecurity consultant for Weaver.</p>
                 <p>I had a pretty amazing college experience. I came in as a finance major, thought it was boring. I decided to switch to MIS, which I thought was much cooler. I got an on campus job, and ended up working with the incredible people at Texas A&M's Study Abroad Programs Office for a year and a half. I studied abroad in Jönköping, Sweden for a semester in the fall of 2018 and had a life changing experience. In all, I made lots of great memories with friends and classmates and learned a lot in the process.</p>
-                <p>As for security, it was during my IT advisory internship at Weaver that I first gained interest and experience in the field. In the time since, I've focused my efforts on honing my networking and security skills (red and blue team). I'm currently working on my Security+ certificate and hope to get my OSCP within the next two years.</p>
+                <p>As for security, it was during my IT advisory internship at Weaver that I first gained interest and experience in the field. In the time since, I've spent much of my free time honing my abilities as a network and web application penetration tester. In February of this year, I obtained my Security+ certification, and I plan to earn my CCSK and OSCP over the next year or so.</p>
+                <p>At work, you'll find me wearing a lot of different hats. I help clients with security compliance audits, IT governance frameworks, BCP/DR, and vulnerability assessments. In the future I plan on expanding my role to include more technical testing. Internally, I work with others in the IT Advisory Services department to create scripts (powershell and bash) to help automate and improve the efficacy of our services.</p>
                 <p>Beyond security, my interests include playing guitar, lifting weights, and history. I speak both English and Portuguese, and am currently trying to learn German. If you're interested in getting to know me better, feel free to reach out! I'm always happy to talk.</p>
             </div>
             <div id="articles" style="display:none;">
+                <a href="https://medium.com/@johnsonmatt/hackthebox-frolic-walkthrough-3c401d5a99f6">2020/04/06&nbsp;HackTheBox:&nbsp;Frolic&nbsp;Walkthrough</a>
+                <br />
+                <a href="https://medium.com/@johnsonmatt/hackthebox-sense-walkthrough-f3f5a2dbac80">2020/02/26&nbsp;HackTheBox:&nbsp;Sense&nbsp;Walkthrough</a>
+                <br />
+                <a href="https://medium.com/@johnsonmatt/hackthebox-blocky-walkthrough-2dca6ff75707">2020/02/26&nbsp;HackTheBox:&nbsp;Blocky&nbsp;Walkthrough</a>
+                <br />
+                <a href="https://medium.com/@johnsonmatt/hackthebox-shocker-walkthrough-ea5def180689">2020/02/18&nbsp;HackTheBox:&nbsp;Shocker&nbsp;Walkthrough</a>
+                <br />
                 <a href="https://medium.com/@johnsonmatt/hackthebox-mirai-walkthrough-16d5978da04d">2020/02/08&nbsp;HackTheBox:&nbsp;Mirai&nbsp;Walkthrough</a>
                 <br />
                 <a href="https://medium.com/@johnsonmatt/hackthebox-bank-walkthrough-8b637ec6a0df">2020/01/29&nbsp;HackTheBox:&nbsp;Bank&nbsp;Walkthrough</a>
@@ -62,7 +71,6 @@
                 <p><a href="https://github.com/mattejohnson/Fun-File-Finder">Fun-File-Finder</a> : Python : Given a URL, directory names, and file names, this program finds all instances of the files listed within the directories listed. Tool for enumeration in CTF/penetration testing. Still rudimentary, but I've been adding functionality to it.</p>
                 <p><a href="https://github.com/mattejohnson/Staged-Nmap-Scanner">Staged-Nmap-Scanner</a> : Bash : Performs a scanned nmap scan for a given IP address. Provides OS detection, version detection, and default script scan results.</p>
                 <p><a href="https://github.com/mattejohnson/NewJerseyCo">NewJerseyCo(Senior Capstone Project)</a> : ASP.NET,C#,MSSQL : Order and customer management application. Creates, logs, and retrieves records for orders, customers, and teams.</p>
-                <p><a href="https://github.com/mattejohnson/AprendaPortguesEuropeu">Aprenda Português Europeu</a> : ASP.NET,C#,MSSQL : Web application to assist with learning European Portuguese. Currently in early development phase, but will eventually be a full-featured app with an SRS-based vocabulary trainer, grammar exercises, articles, and more.</p>
             </div>
             <div id="contact" style="display:none;">
                 <p>To contact me you may email me at <a href="mailto:me@mattejohnson.com">me@mattejohnson.com</a> or send me a message on LinkedIn. I'd love to hear from you!</p>
@@ -70,10 +78,6 @@
             <p id="error" style="display:none; color:#f00;">Invalid command.</p>
             
         </div>
-    </div>
-    <div id="footer">
-        <p>Website made by Matt Johnson in 2019. Last updated 2020/01/30.</p>
-        <a href="https://github.com/mattejohnson/mattejohnson.github.io"><p>View source code</p></a>
     </div>
     <!-- SCRIPTS -->
     <script>
@@ -97,7 +101,7 @@
         });
         function TerminalCommand() {
             var cmd = document.getElementById("TerminalCommand");
-            var bio = document.getElementById("bio");
+            var bio = document.getElementById("whoami");
             var pubs = document.getElementById("articles");
             var proj = document.getElementById("projects");
             var contact = document.getElementById("contact");
@@ -107,7 +111,7 @@
             proj.style.display = "none";
             contact.style.display = "none";
             error.style.display = "none";
-                if (cmd.value == "bio") {
+                if (cmd.value == "whoami") {
                     bio.style.display = "block";
                 }
                 else if (cmd.value == "articles") {

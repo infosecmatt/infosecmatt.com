@@ -54,16 +54,6 @@ a:hover {
     width:100%;
     height: 70vh;
 }
-#footer {
-    height: 5vh;
-}
-#footer p {
-    font-size: 12px;
-}
-#footer a:hover {
-    color: #A8DADC;
-    transition: .5s;
-}
 #articles {
     margin-top: 10px;
 }
@@ -146,9 +136,6 @@ a:hover {
     }
     #header {
         margin-bottom: 10px;
-    }
-    #footer {
-        display:none;
     }
 
 }
