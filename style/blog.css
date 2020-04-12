@@ -1,0 +1,96 @@
+/* ELEMENTS */
+h1 {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 30px;
+    text-align: center;
+    color: #f00;
+}
+table {
+    margin:auto;
+    border-spacing: 0px 25px;
+    width: 65vw;
+}
+tr:hover {
+    transition:0.3s;
+    background-color: rgba(255,255,255,.95);
+    color: black;
+}
+tr:hover a {
+    color:black;
+}
+td {
+    height: 15vh;
+    padding-left: 5px;
+}
+td a {
+    cursor:pointer;
+    display:block;
+    padding: 20px;
+    margin: -20px;
+}
+img {
+    max-height: 15vh;
+    border-radius: 50%;
+}
+/* CLASSES */
+.post-date {
+    font-size: 16px;
+}
+.post-description {
+    text-align: left;
+    vertical-align: top;
+}
+/* IDS */
+#bloghead {
+    margin:auto;
+    height:7.5vh;
+    width: 100%;
+    font-size: 28px;
+}
+/*TABLET*/
+@media screen and (max-width: 1025px) {
+    p {
+        font-size: 16px;
+    }
+    hr {
+        width: 95%;
+    }
+    #main {
+        height: 70vh;
+    }
+    #terminal {
+        width:90%;
+    }
+    #TerminalCommand {
+        font-size: 13px;
+    }
+    #terminal p {
+        font-size: 13px;
+    }
+}
+
+/*MOBILE*/
+@media screen and (max-width: 640px) {
+    h1 {
+        font-size: 30px;
+    }
+    p {
+        font-size: 14px;
+    }
+    i {
+        font-size: 24px;
+    }
+    #terminal p {
+        font-size: 12px;
+    }
+    #terminal {
+        display:block;
+        overflow: auto;
+        font-size: 12px;
+    }
+    #header {
+        margin-bottom: 10px;
+    }
+
+}
+    

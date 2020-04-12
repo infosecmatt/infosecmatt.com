@@ -3,43 +3,46 @@
 <head>
     <title>Matt Johnson</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="icon" type="image/png" href="img/favicon.png">
-    <link href='style/style.css' media='screen' rel='stylesheet' type='text/css' />
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href='style.css' media='screen' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro&display=swap" rel="stylesheet"> 
     <meta name="description" content="I'm Matt Johnson. This is my personal website which includes my resume, a short biography, links to my social media pages, and my GitHub.">
     <meta name="keywords" content="matt johnson, matt, johnson, resume, portfolio, tamu, mis, information systems, it">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 </head>
-<body onload="pageLoad();">
+<body onload="typeWriter();">
     <div id="header">
-        <a href="index.html">
-            <h1 id="sitename">mattejohnson.com</h1>
-        </a>
+        <h1 id="sitename">mattejohnson.com</h1>
+        <p>Howdy, I'm Matt Johnson -- infosec professional, guitarist of 10 years, and wannabe hacker.</p>
     </div>
     <div id="main">
         <div id="links">
             <ul>
-                <li id="linkedin"><a href="https://www.linkedin.com/in/johnsonmatte/" title="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="https://github.com/mattejohnson" title="github" target="_blank"><i class="fab fa-github"></i></a></li>
-                <li><a href="blog/blog.html" title="blog"><i class="fas fa-pencil-alt"></i></a></li>
-                <li><a href="MattJohnsonResume.pdf" title="CV" target="_blank"><i class="far fa-address-card"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/johnsonmatte/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="https://github.com/mattejohnson" target="_blank"><i class="fab fa-github"></i></a></li>
+                <li><a href="https://medium.com/@johnsonmatt" target="_blank"><i class="fab fa-medium"></i></a></li>
+                <li><a href="mailto:me@mattejohnson.com"><i class="far fa-envelope"></i></a></li>
             </ul>
-            <br />
+            <p><a href="MattJohnsonResume.pdf">View My Resume</a></p>
         </div>
         <hr />
-
         <div id="terminal">
-            <span style="color:rgb(124, 255, 2)">me@mattejohnson.com</span><span>:</span><span style="color:rgb(57, 110, 172)">~$ </span>
-            <span id="command">whoami</span>
+            <div id="commands">
+                <p>Available commands:  </p>
+                <p style="color:#A8DADC">whoami&nbsp;&nbsp;&nbsp;&nbsp;articles&nbsp;&nbsp;&nbsp;&nbsp;projects&nbsp;&nbsp;&nbsp;&nbsp;contact</p>
+            </div>
+            <br />
+            <span style="color:rgb(124, 255, 2)">visitor@mattejohnson.com</span><span>:</span><span style="color:rgb(57, 110, 172)">~$ </span>
+            <input id="TerminalCommand" style="border:none" value="" onfocus="this.value = this.value;" autofocus>
             <br />
             
             <div id="whoami" style="display:none;">
                 <p>Howdy, I’m Matt. I'm a native Texan, a security enthusiast, and a musician. I recently graduated from Texas A&amp;M University with a degree in Management Information Systems, and I'm now working as a cybersecurity consultant for Weaver.</p>
                 <p>I had a pretty amazing college experience. I came in as a finance major, thought it was boring. I decided to switch to MIS, which I thought was much cooler. I got an on campus job, and ended up working with the incredible people at Texas A&M's Study Abroad Programs Office for a year and a half. I studied abroad in Jönköping, Sweden for a semester in the fall of 2018 and had a life changing experience. In all, I made lots of great memories with friends and classmates and learned a lot in the process.</p>
-                <p>As for security, it was during my internship at Weaver that I first gained interest and experience in the field. In the time since, I've spent much of my free time honing my abilities as a network and web application penetration tester. In February of this year, I obtained my Security+ certification, and I plan to earn my CCSK and OSCP over the next year or so.</p>
-                <p>At work, you'll find me wearing a lot of different hats. I help clients with security compliance audits, IT governance frameworks, BCP/DR, and vulnerability assessments. In the future I plan on expanding my role to include more technical testing. Internally, I work with others in the IT Advisory Services department to create scripts (powershell and bash) to help automate and improve the efficiency and efficacy of our services.</p>
-                <p>Beyond security, my interests include playing guitar, cooking, reading about history, and going out into nature. I speak both English and Portuguese, and am currently trying to learn German. If you're interested in getting to know me better, feel free to reach out! I'm always happy to talk.</p>
+                <p>As for security, it was during my IT advisory internship at Weaver that I first gained interest and experience in the field. In the time since, I've spent much of my free time honing my abilities as a network and web application penetration tester. In February of this year, I obtained my Security+ certification, and I plan to earn my CCSK and OSCP over the next year or so.</p>
+                <p>At work, you'll find me wearing a lot of different hats. I help clients with security compliance audits, IT governance frameworks, BCP/DR, and vulnerability assessments. In the future I plan on expanding my role to include more technical testing. Internally, I work with others in the IT Advisory Services department to create scripts (powershell and bash) to help automate and improve the efficacy of our services.</p>
+                <p>Beyond security, my interests include playing guitar, lifting weights, and history. I speak both English and Portuguese, and am currently trying to learn German. If you're interested in getting to know me better, feel free to reach out! I'm always happy to talk.</p>
             </div>
             <div id="articles" style="display:none;">
                 <a href="https://medium.com/@johnsonmatt/hackthebox-frolic-walkthrough-3c401d5a99f6">2020/04/06&nbsp;HackTheBox:&nbsp;Frolic&nbsp;Walkthrough</a>
@@ -78,54 +81,54 @@
     </div>
     <!-- SCRIPTS -->
     <script>
-        // sitename typing effect
         var i = 0;
         var txt = 'mattejohnson.com'; /* The text */
-        var sitespeed = 100; /* The speed/duration of the effect in milliseconds */
+        var speed = 100; /* The speed/duration of the effect in milliseconds */
         var site = document.getElementById("sitename");
         site.innerHTML = "";
-
-        //terminal typing effect
-        var j = 0;
-        var literal = 'whoami';
-        var cmdspeed = 75;
-        var cmd = document.getElementById("command");
-        cmd.innerHTML = "";
-
-
         function typeWriter() {
             if (i < txt.length) {
                 site.innerHTML += txt.charAt(i);
                 i++;
-                setTimeout(typeWriter, sitespeed);
+                setTimeout(typeWriter, speed);
             }
         }
-
-        
-        function cmdWriter() {
-            if (j < literal.length) {
-                cmd.innerHTML += literal.charAt(j);
-                j++;
-                setTimeout(cmdWriter, cmdspeed);
+        var input = document.getElementById("TerminalCommand");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                TerminalCommand();
             }
-        }
-
-        function cmdEnter() {
-            var whoami = document.getElementById("whoami");
-            whoami.style.display = "block";
-        }
-        
-        function sleep(sleepDuration){
-            var now = new Date().getTime();
-            while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
-        }
-
-        function pageLoad() {
-            setTimeout(typeWriter, 0);
-            setTimeout(cmdWriter, 2000);
-            setTimeout(cmdEnter, 2700);
-        }
-        
+        });
+        function TerminalCommand() {
+            var cmd = document.getElementById("TerminalCommand");
+            var bio = document.getElementById("whoami");
+            var pubs = document.getElementById("articles");
+            var proj = document.getElementById("projects");
+            var contact = document.getElementById("contact");
+            var error = document.getElementById("error");
+            bio.style.display = "none";
+            pubs.style.display = "none";
+            proj.style.display = "none";
+            contact.style.display = "none";
+            error.style.display = "none";
+                if (cmd.value == "whoami") {
+                    bio.style.display = "block";
+                }
+                else if (cmd.value == "articles") {
+                    pubs.style.display = "block";
+                }
+                else if (cmd.value == "projects") {
+                    proj.style.display = "block";
+                }
+                else if (cmd.value == "contact") {
+                    contact.style.display = "block";
+                }
+                else {
+                    error.style.display = "block";
+                }
+                cmd.focus();
+                cmd.select();
+            }
     </script>
 </body>
 </html>
