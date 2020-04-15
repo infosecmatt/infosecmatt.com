@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTB: Frolic | Matt Johnson</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" type="image/png" href="../img/favicon.png">
+    <link href='../../style/style.css' media='screen' rel='stylesheet' type='text/css' />
+    <link href='../../style/blog.css' media='screen' rel='stylesheet' type='text/css' />
+    <link href='../../style/post.css' media='screen' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro&display=swap" rel="stylesheet"> 
+    <meta name="description" content="I'm Matt Johnson. This is my personal website which includes my resume, a short biography, links to my social media pages, and my GitHub.">
+    <meta name="keywords" content="matt johnson, matt, johnson, resume, portfolio, tamu, mis, information systems, it">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body>
+    <div id="bloghead">
+        <a href="../../index.html">
+            <h1 id="sitename">mattejohnson.com</h1>
+        </a>
+    </div>
+    <div id="main">
+        <hr />
+        <ul>
+            <li><a href="../blog.html">All Posts</a></li>
+            <li><a href="../ctf.html">CTF Writeups</a></li>
+            <li><a href="../security.html">Security</a></li>
+            <li><a href="../development.html">Development</a></li>
+            <li><a href="../misc.html">Misc</a></li>
+        </ul>
+        <hr />
+        <div id="post">
+            <div id="content">
+                <div id="posthead" class="row">
+                    <div id="posthead-img" class="column">
+                        <img src="../../img/blog-preview/frolic-preview.png" />
+                    </div>
+                    <div id="posthead-title" class="column">
+                        <h2 id="title">HTB: Frolic Write-Up</h2>
+                        <p id="article-id">CTF.2020.008</p>
+                        <p id="author">Matt Johnson</p>
+                        <p id="post-date">2020-04-06</p>
+                    </div>
+                </div>
+                <div id="post-body">
+                    <div id="summary">
+                        <h3 class="section-header">Summary</h3>
+                        <p>Machine Name: Frolic</p>
+                        <p>IP Address: 10.10.10.111</p>
+                        <p>Difficulty: Medium</p>
+                        <p>HackTheBox's Frolic was a machine that, given sufficient patience and enough enumeration, was relatively easy to get a foothold on via the vulnerable PlaySMS web application. The application is discovered by following an increasingly cryptic trail of hints. Once on the box, internal enumeration shows that there is an SUID program called 'rop' in a folder accessible by the user 'www-data'. In order to get a root shell, one has to use a ROP attack against the vulnerable strcpy() method within this program.</p>
+                    </div>
+                    <div id="tools-used">
+                        <h3 class="section-header">Tools Used</h3>
+                        <p>Nmap, Gobuster, Ook! Interpreter, Brainfuck Interpreter, Metasploit, gdb, ldd</p>
+                    </div>
+                    <div id="initial-foothold">
+                        <h3 class="section-header">Initial Foothold</h3>
+                        <img src="../../img/posts/frolic/nmap.png">
+                        <p>I attempted to enumerate SMB and see if there was any useful information, but there was nothing to see. Likewise with the Node-RED server. The Nginx server on port 9999 was interesting, however. Visiting http://10.10.10.111:9999/ showed only the default Nginx page, but enumerating directories with gobuster led to some discoveries:</p>
+                        <img src="../../img/posts/frolic/gobuster.png">
+                        <p>The /backup directory gave me a set of credentials, 'admin:imnothuman', but they didn't give me access to any services. The /dev directory did not initially appear useful, but running a gobuster scan against it revealed a hidden service:</p>
+                        <img src="../../img/posts/frolic/gobuster-dev.png">
+                        <img src="../../img/posts/frolic/dev-backup-folder.png">
+                        <img src="../../img/posts/frolic/playsms-interface.png">
+                        <p>Revisiting the initial gobuster scan, the /admin directory redirected to a login panel. I was able to find credentials to gain access within the source code:</p>
+                        <img src="../../img/posts/frolic/admin-panel-source.png">
+                        <img src="../../img/posts/frolic/admin-success.png">
+                        <p>Upon further research, I determined that this seemingly random noise was an encoded, esoteric language called Ook! Using a decoder found online, I learned that it pointed to another hidden directory:</p>
+                        <img src="../../img/posts/frolic/ook-decoder.png">
+                        <img src="../../img/posts/frolic/ook-link.png">
+                        <p>Assuming this was base64, I decoded it on my machine and ran 'file' against it, which demonstrated that it was a password-protected .zip file. The password was simply 'password'. Within the decompressed .zip file was the file 'index.php'. This file was encoded three times, first in hex, then in base64, and lastly in Brainfuck, which is similar to Ook!
+                        </p>
+                        <img src="../../img/posts/frolic/zip-decompress.png">
+                        <img src="../../img/posts/frolic/index-php-to-brainfuck.png">
+                        <img src="../../img/posts/frolic/brainfuck-decoder.png">
+                        <p>The resulting string 'idkwhatispass' turned out to be the password needed to gain access to PlaySMS. From here, I used Searchsploit to find applicable vulnerabilities. The exploit I ended up using was an authenticated RCE tracked under CVE-2017-9101. Ordinarily, I tend to avoid using Metasploit, but this time I happened to use it.</p>
+                        <img src="../../img/posts/frolic/msf-success.png">
+                        <p>With a foothold on the system, it was time to focus on escalating privileges.</p>
+
+                    </div>
+                    <div id="privilege-escalation">
+                        <h3 class="section-header">Privilege Escalation</h3>
+                        <p>While doing some initial reconnaissance on the machine, I was able to discover an SUID binary called 'rop'. The program was designed to take a user argument and repeat it. Stress-testing the application revealed an inability to handle strings with 52 bytes or more. Inspecting the binary revealed that the program was likely using strcpy(), an old and dangerous function in C.</p>
+                        <img src="../../img/posts/frolic/rop-source-inspect.png">
+                        <p>In order to get a root shell, I needed to craft a payload that would overwrite memory in a way that would run a system call to '/bin/sh'. For the payload, I would need to know:</p>
+                        <p>1. The length of the buffer.</p>
+                        <p>2. The address in memory of the system() function</p>
+                        <p>3. The address in memory of the exit() function</p>
+                        <p>4. The disk address of the library used by the program.</p>
+                        <p>5. The offset of /bin/sh within the previously mentioned library.</p>
+                        <p>Already knowing the length of the buffer, the images below depict the rest of the steps needed to perform this exploit:</p>
+                        <img src="../../img/posts/frolic/gdb-system.png">
+                        <img src="../../img/posts/frolic/gdb-exit.png">
+                        <img src="../../img/posts/frolic/ldd-libc.png">
+                        <img src="../../img/posts/frolic/ldd-binsh.png">
+                        <p>Running the program using this custom payload grants a root shell:</p>
+                        <img src="../../img/posts/frolic/root.png">
+                    </div>
+                    <br />
+                    <br />
+                    <hr />
+                    <br />
+                    <p>As always, feedback is greatly appreciated. If you have any questions or comments, feel free to email me at <a href="mailto:me@mattejohnson.com">me@mattejohnson.com</a>.</p>
+                </div>
+            </div>
+                
+        </div>
+    </div>
+</body>
+</html>

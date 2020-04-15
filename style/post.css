@@ -1,6 +1,12 @@
 /* Elements */
-.section-header {
-    font-size: 30px;
+span {
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+h4 {
+    font-size: 24px;
+    color: #3f3f3f;
+    margin:15px 0;
 }
 /* IDs */
 #post {
@@ -15,7 +21,11 @@
 #content {
     width:65vw;
     margin:auto;
+    margin-bottom: 100px;
     text-align: left;
+}
+#content a {
+    color:black;
 }
 #title {
     font-size: 40px;
@@ -37,8 +47,18 @@
     width: 50%;
     text-align: left;
 }
+#post-body img {
+    margin:10px auto;
+    display:block;
+    width:85%;
+    max-height: none;
+    border-radius: 0;
+}
 
 /* Classes */
+.section-header {
+    font-size: 30px;
+}
 .column {
     float: right;
     width: 50%;
