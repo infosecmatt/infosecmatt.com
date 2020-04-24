@@ -44,15 +44,12 @@
                 </div>
                 <div id="post-body">
                     <div id="summary">
-                        <h3 class="section-header">Summary</h3>
-                        <p>Machine Name: Frolic</p>
-                        <p>IP Address: 10.10.10.111</p>
-                        <p>Difficulty: Medium</p>
-                        <p>HackTheBox's Frolic was a machine that, given sufficient patience and enough enumeration, was relatively easy to get a foothold on via the vulnerable PlaySMS web application. The application is discovered by following an increasingly cryptic trail of hints. Once on the box, internal enumeration shows that there is an SUID program called 'rop' in a folder accessible by the user 'www-data'. In order to get a root shell, one has to use a ROP attack against the vulnerable strcpy() method within this program.</p>
-                    </div>
-                    <div id="tools-used">
-                        <h3 class="section-header">Tools Used</h3>
-                        <p>Nmap, Gobuster, Ook! Interpreter, Brainfuck Interpreter, Metasploit, gdb, ldd</p>
+                        <h3 class="section-header">High-Level Information</h3>
+                        <p><span style="font-weight: bold;">Machine Name</span>: Frolic</p>
+                        <p><span style="font-weight: bold;">IP Address</span>: 10.10.10.111</p>
+                        <p><span style="font-weight: bold;">Difficulty</span>: Medium</p>
+                        <p><span style="font-weight: bold;">Summary</span>: HackTheBox's Frolic was a machine that, given sufficient patience and enough enumeration, was relatively easy to get a foothold on via the vulnerable PlaySMS web application. The application is discovered by following an increasingly cryptic trail of hints. Once on the box, internal enumeration shows that there is an SUID program called 'rop' in a folder accessible by the user 'www-data'. In order to get a root shell, one has to use a ROP attack against the vulnerable strcpy() method within this program.</p>
+                        <p><span style="font-weight: bold;">Tools Used</span>: Nmap, Gobuster, Ook! Interpreter, Brainfuck Interpreter, Metasploit, gdb, ldd</p>
                     </div>
                     <div id="initial-foothold">
                         <h3 class="section-header">Initial Foothold</h3>
@@ -74,7 +71,7 @@
                         <img src="../../img/posts/frolic/zip-decompress.png">
                         <img src="../../img/posts/frolic/index-php-to-brainfuck.png">
                         <img src="../../img/posts/frolic/brainfuck-decoder.png">
-                        <p>The resulting string 'idkwhatispass' turned out to be the password needed to gain access to PlaySMS. From here, I used Searchsploit to find applicable vulnerabilities. The exploit I ended up using was an authenticated RCE tracked under CVE-2017-9101. Ordinarily, I tend to avoid using Metasploit, but this time I happened to use it.</p>
+                        <p>The resulting string 'idkwhatispass' turned out to be the password needed to gain access to PlaySMS. From here, I used Searchsploit to find applicable vulnerabilities. The exploit I ended up using was an authenticated RCE tracked under CVE-2017-9101. Ordinarily, I try to avoid using Metasploit, but this time I happened to use it.</p>
                         <img src="../../img/posts/frolic/msf-success.png">
                         <p>With a foothold on the system, it was time to focus on escalating privileges.</p>
 
