@@ -2,11 +2,7 @@
 table {
     margin:auto;
     border-spacing: 0px 25px;
-    width: 100%;
-}
-#posts {
-    width:70vw;
-    margin:auto;
+    width: 75%;
 }
 tr:hover {
     transition:0.3s;
@@ -39,50 +35,3 @@ img {
     vertical-align: top;
     line-height: 5px;
 }
-/*TABLET*/
-@media screen and (max-width: 1025px) {
-    p {
-        font-size: 16px;
-    }
-    hr {
-        width: 95%;
-    }
-    #main {
-        height: 70vh;
-    }
-    #terminal {
-        width:90%;
-    }
-    #TerminalCommand {
-        font-size: 13px;
-    }
-    #terminal p {
-        font-size: 13px;
-    }
-}
-
-/*MOBILE*/
-@media screen and (max-width: 640px) {
-    h1 {
-        font-size: 30px;
-    }
-    p {
-        font-size: 14px;
-    }
-    i {
-        font-size: 24px;
-    }
-    #terminal p {
-        font-size: 12px;
-    }
-    #terminal {
-        display:block;
-        overflow: auto;
-        font-size: 12px;
-    }
-    #header {
-        margin-bottom: 10px;
-    }
-
-}
-    

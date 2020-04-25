@@ -12,7 +12,7 @@
     <meta name="keywords" content="matt johnson, matt, johnson, resume, portfolio, tamu, mis, information systems, it">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 </head>
-<body onload="pageLoad();">
+<body id="home" onload="pageLoad();">
     <div id="header">
         <a href="index.html">
             <h1 id="sitename">infosecmatt.com</h1>
@@ -34,47 +34,14 @@
             <span style="color:rgb(124, 255, 2)">me@infosecmatt.com</span><span>:</span><span style="color:rgb(57, 110, 172)">~$ </span>
             <span id="command">whoami</span>
             <br />
-            
-            <div id="whoami" style="display:none;">
+
+            <div id="whoami" style="opacity:0;">
                 <p>Howdy, I’m Matt. I'm a native Texan, a security enthusiast, and a musician. I recently graduated from Texas A&amp;M University with a degree in Management Information Systems, and I'm now working as a cybersecurity consultant for Weaver.</p>
                 <p>I had a pretty amazing college experience. I came in as a finance major, thought it was boring. I decided to switch to MIS, which I thought was much cooler. I got an on campus job, and ended up working with the incredible people at Texas A&M's Study Abroad Programs Office for a year and a half. I studied abroad in Jönköping, Sweden for a semester in the fall of 2018 and had a life changing experience. In all, I made lots of great memories with friends and classmates and learned a lot in the process.</p>
                 <p>As for security, it was during my internship at Weaver that I first gained interest and experience in the field. In the time since, I've spent much of my free time honing my abilities as a network and web application penetration tester. In February of this year, I obtained my Security+ certification, and I plan to earn my CCSK and OSCP over the next year or so.</p>
                 <p>At work, you'll find me wearing a lot of different hats. I help clients with security compliance audits, IT governance frameworks, BCP/DR, and vulnerability assessments. In the future I plan on expanding my role to include more technical testing. Internally, I work with others in the IT Advisory Services department to create scripts (powershell and bash) to help automate and improve the efficiency and efficacy of our services.</p>
                 <p>Beyond security, my interests include playing guitar, cooking, reading about history, and going out into nature. I speak both English and Portuguese, and am currently trying to learn German. If you're interested in getting to know me better, feel free to reach out! I'm always happy to talk.</p>
             </div>
-            <div id="articles" style="display:none;">
-                <a href="https://medium.com/@johnsonmatt/hackthebox-frolic-walkthrough-3c401d5a99f6">2020/04/06&nbsp;HackTheBox:&nbsp;Frolic&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-sense-walkthrough-f3f5a2dbac80">2020/02/26&nbsp;HackTheBox:&nbsp;Sense&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-blocky-walkthrough-2dca6ff75707">2020/02/26&nbsp;HackTheBox:&nbsp;Blocky&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-shocker-walkthrough-ea5def180689">2020/02/18&nbsp;HackTheBox:&nbsp;Shocker&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-mirai-walkthrough-16d5978da04d">2020/02/08&nbsp;HackTheBox:&nbsp;Mirai&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-bank-walkthrough-8b637ec6a0df">2020/01/29&nbsp;HackTheBox:&nbsp;Bank&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-granny-grandpa-walkthrough-75983b34a92e">2020/01/29&nbsp;HackTheBox:&nbsp;Granny/Grandpa&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-arctic-walkthrough-a81f1236ae66">2020/01/06&nbsp;HackTheBox:&nbsp;Arctic&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-optimum-walkthrough-a18e608749e8">2020/01/02&nbsp;HackTheBox:&nbsp;Optimum&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-beep-walkthrough-f48fc55aee51">2019/12/30&nbsp;HackTheBox:&nbsp;Beep&nbsp;Walkthrough</a>
-                <br />
-                <a href="https://medium.com/@johnsonmatt/hackthebox-devel-walkthrough-b24879aa6e76">2019/12/21&nbsp;HackTheBox:&nbsp;Devel&nbsp;Walkthrough</a>
-            </div>
-            <div id="projects" style="display:none;">
-                <p><a href="https://github.com/infosecmatt/Fun-File-Finder">Fun-File-Finder</a> : Python : Given a URL, directory names, and file names, this program finds all instances of the files listed within the directories listed. Tool for enumeration in CTF/penetration testing. Still rudimentary, but I've been adding functionality to it.</p>
-                <p><a href="https://github.com/infosecmatt/Staged-Nmap-Scanner">Staged-Nmap-Scanner</a> : Bash : Performs a scanned nmap scan for a given IP address. Provides OS detection, version detection, and default script scan results.</p>
-                <p><a href="https://github.com/infosecmatt/NewJerseyCo">NewJerseyCo(Senior Capstone Project)</a> : ASP.NET,C#,MSSQL : Order and customer management application. Creates, logs, and retrieves records for orders, customers, and teams.</p>
-            </div>
-            <div id="contact" style="display:none;">
-                <p>To contact me you may email me at <a href="mailto:me@infosecmatt.com">me@infosecmatt.com</a> or send me a message on LinkedIn. I'd love to hear from you!</p>
-            </div>
-            <p id="error" style="display:none; color:#f00;">Invalid command.</p>
-            
         </div>
     </div>
     <!-- SCRIPTS -->
@@ -113,7 +80,7 @@
 
         function cmdEnter() {
             var whoami = document.getElementById("whoami");
-            whoami.style.display = "block";
+            whoami.style.opacity = 100;
         }
         
         function sleep(sleepDuration){

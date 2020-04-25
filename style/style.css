@@ -48,7 +48,10 @@ a:hover {
     color: #A8DADC;
     transition:.5s;
 }
-/* IDS */
+/* IDs */
+#home {
+    margin-left: -18px;
+}
 #header {
     height:7.5vh;
 }
