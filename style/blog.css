@@ -1,14 +1,12 @@
 /* ELEMENTS */
-h1 {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 30px;
-    text-align: center;
-    color: #f00;
-}
 table {
     margin:auto;
     border-spacing: 0px 25px;
-    width: 65vw;
+    width: 100%;
+}
+#posts {
+    width:70vw;
+    margin:auto;
 }
 tr:hover {
     transition:0.3s;
@@ -40,13 +38,6 @@ img {
     text-align: left;
     vertical-align: top;
     line-height: 5px;
-}
-/* IDS */
-#bloghead {
-    margin:auto;
-    height:7.5vh;
-    width: 100%;
-    font-size: 28px;
 }
 /*TABLET*/
 @media screen and (max-width: 1025px) {
