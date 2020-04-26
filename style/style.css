@@ -1,19 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Roboto+Mono|Source+Code+Pro&display=swap');
 body {
     background-color: rgb(20, 20, 20);
     color:white;
     padding: 1% 5%;
     margin:auto;
     text-align: center;
+    font-family: 'Arial', 'Open Sans', Roboto, "Helvetica Neue", sans-serif;
 }
 /* ELEMENTS */
 h1 {
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 36px;
     letter-spacing: 2px;
     color: rgb(255, 30, 30);
 }
 p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Arial', 'Open Sans', Roboto, "Helvetica Neue", sans-serif;
     font-size: 20px;
 }
 hr {
@@ -61,13 +63,13 @@ a:hover {
 }
 #terminal {
     padding:1%;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     text-align: left;
     margin:auto;
     width:75%;
 }
 #terminal p {
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 16px;
 }
 
@@ -101,6 +103,15 @@ a:hover {
     }
     i {
         font-size: 24px;
+    }
+    #home {
+        margin-left: 0;
+    }
+    #links {
+        font-size: 14px;
+    }
+    #links i {
+        font-size: 14px;
     }
     #terminal p {
         font-size: 12px;

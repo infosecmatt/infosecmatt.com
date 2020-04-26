@@ -1,7 +1,7 @@
 /* Elements */
 span {
     font-size: 20px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Arial', 'Open Sans', Roboto, "Helvetica Neue", sans-serif;
 }
 p {
     font-size: 18px;
@@ -71,3 +71,56 @@ h4 {
     display: table;
     clear: both;
   }
+
+  /*TABLET*/
+@media screen and (max-width: 1025px) {
+    #content {
+        width:85vw;
+    }
+    #posthead-img {
+        float:left;
+        width:100%;
+        text-align: center;
+    }
+    #posthead-img img {
+        width:30%;
+    }
+    #posthead-title {
+        float:left;
+        width: 100%;
+        text-align: center;
+    }
+    .section-header {
+        font-size: 28px;
+    }
+}
+
+/*MOBILE*/
+@media screen and (max-width: 640px) {
+    span, p {
+        font-size: 14px;
+    }
+    #title {
+        font-size: 28px;
+        line-height: 20px;
+    }
+    #content {
+        width:95vw;
+    }
+    #posthead-img {
+        float:left;
+        width:100%;
+        text-align: center;
+    }
+    #posthead-img img {
+        width:35%;
+    }
+    #posthead-title {
+        float:left;
+        width: 100%;
+        text-align: center;
+    }
+    .section-header {
+        font-size: 24px;
+    }
+}

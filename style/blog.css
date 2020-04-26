@@ -35,3 +35,55 @@ img {
     vertical-align: top;
     line-height: 5px;
 }
+/*TABLET*/
+@media screen and (max-width: 1025px) {
+    table {
+        width:95%;
+    }
+    td {
+        height: 15vh;
+    }
+    h2 {
+        font-size: 24px;
+        line-height: 25px;
+    }
+    /* IDs */
+    #blogmenu {
+        font-size: 16px;
+    }
+    /* CLASSES */
+    .post-date, .post-id {
+        font-size: 16px;
+    }
+    .post-description {
+        padding-top: 0;
+        line-height: 5px;
+    }
+}
+
+/*MOBILE*/
+@media screen and (max-width: 640px) {
+    table {
+        width:100%;
+    }
+    td {
+        height: 20vh;
+    }
+    h2 {
+        font-size: 14px;
+        line-height: 15px;
+    }
+    /* IDs */
+    #blogmenu {
+        font-size: 12px;
+    }
+    /* CLASSES */
+    .post-date, .post-id {
+        font-size: 14px;
+    }
+    .post-description {
+        padding-top: 15px;
+        line-height: 5px;
+    }
+
+}
