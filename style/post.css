@@ -11,6 +11,17 @@ h4 {
     color: #3f3f3f;
     margin:15px 0;
 }
+pre {
+    border-radius: 3px;
+    background-color: rgb(40, 40, 40);
+    color:white;
+    padding: 10px;
+    overflow: auto;
+}
+code {
+    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 14px;
+}
 /* IDs */
 #post {
     background-color: white;
@@ -55,7 +66,7 @@ h4 {
     display:block;
     width:100%;
     max-height: none;
-    border-radius: 0;
+    border-radius: 3px;
 }
 
 /* Classes */
