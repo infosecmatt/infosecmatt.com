@@ -67,6 +67,7 @@ code {
     width:100%;
     max-height: none;
     border-radius: 3px;
+    border: 1px solid rgb(40,40,40) ;
 }
 
 /* Classes */
