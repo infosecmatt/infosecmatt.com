@@ -112,6 +112,9 @@ code {
     span, p {
         font-size: 14px;
     }
+    code {
+        font-size: 12px;
+    }
     #title {
         font-size: 28px;
         line-height: 20px;
