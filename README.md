@@ -1,6 +1,6 @@
 # infosecmatt.com
 Personal website
-##Purpose
+## Purpose
 To present a brief biography of myself, to host my blog posts, and to make my resumé and contact information available to those who want to see it.
 
 ## What's to come
