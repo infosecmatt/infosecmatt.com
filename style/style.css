@@ -17,6 +17,7 @@ p {
     font-family: 'Arial', 'Open Sans', Roboto, "Helvetica Neue", sans-serif;
     font-size: 20px;
 }
+
 hr {
     color:white;
     width:75%;
@@ -67,9 +68,16 @@ a:hover {
     margin:auto;
     width:75%;
 }
-#terminal p {
+#terminal p,#terminal code,#terminal a {
     font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 16px;
+}
+#terminal a {
+    color: #A8DADC;
+}
+#terminal a:hover {
+    color:white;
+    transition:.5s;
 }
 
 

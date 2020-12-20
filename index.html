@@ -33,7 +33,7 @@
             <span id="command">whoami</span>
             <br />
 
-            <div id="whoami" style="opacity:0;">
+            <div id="terminalOutput" style="opacity:0;">
                 <p>Howdy, I'm Matt Johnson.</p>
                 <p>Professional Summary: After graduating college, I joined Weaver as a cybersecurity consultant and auditor after having done an internship with them the summer before. My work mostly consists of helping clients with security compliance audits, IT governance frameworks, BCP/DR, vulnerability assessments, and (when I'm lucky) penetration testing. Some of my more memorable engagements so far include a ransomware readiness assessment for a utility provider, a PCI audit for a large cloud provider, a NIST CSF assessment for a financial institution, and an external penetration test for a small bank. My certifications include a Security+ and CCSK, and I plan on becoming an OSCP by next year.</p>
                 <p>College Summary: In December 2019 I graduated summa cum laude from Texas A&amp;M University with a degree in Management Information Systems. Some of my favorite college memories include studying abroad in Jönköping, Sweden during the fall 2018 semester, working at the Texas A&M Study Abroad Office, and <a href="https://www.espn.com/college-football/game/_/gameId/400869023">watching the Aggies pull off an amazing OT win to stay undefeated</a>. We proceeded to finish the season 8-5, so that didn't exactly work out.</p>
@@ -77,8 +77,8 @@
         }
 
         function cmdEnter() {
-            var whoami = document.getElementById("whoami");
-            whoami.style.opacity = 100;
+            var output = document.getElementById("terminalOutput");
+            output.style.opacity = 100;
         }
         
         function sleep(sleepDuration){
