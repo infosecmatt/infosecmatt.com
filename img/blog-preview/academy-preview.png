@@ -1,0 +1,12 @@
+--2021-01-24 22:14:07--  https://www.hackthebox.eu/storage/avatars/10c8da0b46f53c882da946668dcdab95.png
+Resolving www.hackthebox.eu (www.hackthebox.eu)... 104.20.66.68, 104.20.55.68, 172.67.1.1, ...
+Connecting to www.hackthebox.eu (www.hackthebox.eu)|104.20.66.68|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 81195 (79K) [image/png]
+Saving to: ‘10c8da0b46f53c882da946668dcdab95.png’
+
+     0K .......... .......... .......... .......... .......... 63% 30.6M 0s
+    50K .......... .......... .........                       100% 1.59M=0.02s
+
+2021-01-24 22:14:07 (3.96 MB/s) - ‘10c8da0b46f53c882da946668dcdab95.png’ saved [81195/81195]
+
