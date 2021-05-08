@@ -1,136 +1,335 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Roboto+Mono|Source+Code+Pro&display=swap');
-body {
-    background-color: rgb(20, 20, 20);
-    color:white;
-    padding: 1% 5%;
-    margin:auto;
-    text-align: center;
-    font-family: 'Arial', 'Open Sans', Roboto, "Helvetica Neue", sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Concert+One|Open+Sans|Noto+Sans+JP|Ubuntu|Roboto|Roboto+Mono|Source+Code+Pro&display=swap');
+html {
+	scroll-behavior: smooth;
 }
-/* ELEMENTS */
-h1 {
-    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 36px;
-    color: rgb(255, 30, 30);
+body {
+    background-color: rgb(255, 255, 255);
+    color:black;
+    margin:auto;
+    font-family: 'Noto Sans JP', Roboto, 'Arial', 'Open Sans', "Helvetica Neue", sans-serif;
 }
 p {
-    font-family: 'Arial', 'Open Sans', Roboto, "Helvetica Neue", sans-serif;
-    font-size: 20px;
+    line-height: 1.5;
 }
-
-hr {
-    color:white;
-    width:75%;
+h2 {
+    text-align:center;
+    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+a {
+    text-decoration: none;
+    color:black;
+}
+a:hover {
+    color: #A8DADC;
+    transition:.5s;
+}
+a:visited {
+    color:black;
 }
 i {
-    font-size: 18px;}
-ul {
+    text-decoration: none;
+    color:black;
+}
+i:visited {
+    color:black;
+}
+/* CLASSES */
+.buttons {
+    text-align: center;
+}
+.button {
+    border-radius: 5px;
+    border: 1px solid #ab2537fa;
+    padding: 2% 2.5%;
+    display: inline-block;
+    font-size: 20px;
+    text-align: center;
+    margin: 1vh 1vw;
+    transition: all .25s linear 0s;
+    width:10vw;
+}
+.button:hover {
+    border: 1px solid #A8DADC;
+}
+  /* IDs */
+#header {
+    background-color: black;
+    color:white;
+    height: 20vh;
+    line-height: 5vh;
+    /* fix top bar */
+    width:100vw;
+    position:fixed;
+    top:0;
+    overflow:hidden;
+    z-index: 300;
+}
+#header h1 {
+    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    text-align:center;
+    margin:0;
+    padding:25px;
+    color:red;
+    font-size: 36px;
+}
+#header ul {
     width:100%;
     text-align: center;
     list-style: none;
     margin: 0 auto;
     padding:0;
 }
-li {
+#header li {
     display: inline;
-    margin:2%;
+    margin: .5% 1%;
     text-align: center;
+    font-size: 14px;
+    letter-spacing: 1.5px;
 }
-li a i {
-    margin-right: 5px;
-}
-a {
+#header li a {
     color:white;
     text-decoration: none;
 }
-a:visited {
+#header li a:visited {
     color:white;
 }
-a:hover {
+#header li a:hover {
     color: #A8DADC;
     transition:.5s;
 }
-/* IDs */
-#home {
-    margin-left: -18px;
+#header li a i {
+    color:white;
+    text-decoration: none;
+    font-size: 30px;
 }
-#header {
-    height:7.5vh;
+#header li a i:hover {
+    color: #A8DADC;
+    transition:.5s;
 }
-#main {
-    width:100%;
-    height: 70vh;
+/* terminal effect */
+@keyframes caret {
+    50% {background-color: black;}
 }
-#terminal {
-    padding:1%;
-    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    text-align: left;
+#animation {
+    display: inline-block;
+}
+#animation span {
+    background-color:white;
+    animation: caret 1s steps(1, end) infinite;
+}
+#title {
+    height:10vh;
+}
+#title span {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#body {
+    padding: 2vw;
+    margin-top:20vh;
+    overflow:hidden;
+}
+#welcome {
+    height:80vh;
+}
+#welcome h2 {
+    font-family: 'Concert One', 'Noto Sans JP', Roboto, 'Arial', 'Open Sans', "Helvetica Neue", sans-serif;
+    letter-spacing: 1.5px;
+    font-size: 32px;
+    color:rgb(65, 65, 65)
+}
+
+#welcome img {
+    width:25%;
+    opacity:90%;
+    display:block;
+    margin:1% auto;
+    border-radius: 50%;
+}
+#welcome p {
+    text-align: justify;
+    display:block;
     margin:auto;
-    width:75%;
+    width:60%;
 }
-#terminal p,#terminal code,#terminal a {
-    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 16px;
+#about {
+    text-align: justify;
+    display:block;
+    width: 50%;
+    margin:auto;
+    
 }
-#terminal a {
-    color: #A8DADC;
+#about h2 {
+    letter-spacing: 1.25px;
+    color:rgb(65, 65, 65)
 }
-#terminal a:hover {
-    color:white;
-    transition:.5s;
+#about ul {
+    text-align: left;
+    margin: 3px 10px;
 }
-
-
-/*TABLET*/
-@media screen and (max-width: 1025px) {
+#about li {
+    padding: 2px;
+}
+#about img {
+    width:60%;
+    opacity:90%;
+    display:block;
+    margin:1% auto;
+    border-radius: 2%;
+}
+/* TABLET */
+@media screen and (max-width: 1023px) {
     p {
-        font-size: 16px;
-    }
-    hr {
-        width: 95%;
-    }
-    #main {
-        height: 70vh;
-    }
-    #terminal {
-        width:90%;
-    }
-    #terminal p {
-        font-size: 13px;
-    }
-}
-
-/*MOBILE*/
-@media screen and (max-width: 640px) {
-    h1 {
-        font-size: 30px;
-    }
-    p {
-        font-size: 14px;
+        font-size:20px;
     }
     i {
-        font-size: 24px;
+        font-size:20px;
+    }    
+    a {
+        font-size:20px;
+    }
+    #header {
+        height:18vh;
+        font-size:14px;
+        line-height: 4vh;
+    }
+    #header h1 {
+        /* font-size: px; */
+        padding:15px 1px;
+    }
+    #header li i a {
+        font-size: 14px;
+    }
+    #title {
+        height:7.5vh;
     }
     #home {
         margin-left: 0;
     }
-    #links {
-        font-size: 14px;
+    #header {
+        margin-bottom: 10px;
     }
-    #links i {
-        font-size: 14px;
+    #header ul {
+        margin: 1% 0;
     }
-    #terminal p {
-        font-size: 12px;
+    #header li {
+        margin: .5% 5%;
     }
-    #terminal {
+    #header li a i {
+        color:white;
+        text-decoration: none;
+        font-size: 32px;
+    }
+    #welcome h2 {
+        font-size: 32px;
+    }
+    #welcome img {
+        width:50%;
+        opacity:90%;
         display:block;
-        overflow: auto;
-        font-size: 12px;
+        margin:1% auto;
+        border-radius: 50%;
+    }
+    #welcome p {
+        text-align: justify;
+        display:block;
+        margin:auto;
+        width:80%;
+    }
+    #body {
+        margin-top:15vh;
+        overflow:hidden;
+    }
+    #about {
+        text-align: justify;
+        display:block;
+        width: 80%;
+        margin:auto;
+    }
+    #about img {
+        width:80%;
+    }
+    .button {
+        width:25vw;
+    }
+}
+/*MOBILE*/
+@media screen and (max-width: 640px) {
+    p {
+        font-size:15px;
+    }
+    i {
+        font-size:15px;
+    }    
+    a {
+        font-size:15px;
+    }
+    #header {
+        height:18vh;
+        font-size:14px;
+        line-height: 4vh;
+    }
+    #header h1 {
+        font-size: 24px;
+        padding:15px 1px;
+    }
+    #header li i a {
+        font-size: 14px;
+    }
+    #title {
+        height:7.5vh;
+    }
+    #home {
+        margin-left: 0;
     }
     #header {
         margin-bottom: 10px;
     }
-
+    #header ul {
+        margin: 1% 0;
+    }
+    #header li {
+        margin: .5% 5%;
+    }
+    #header li a i {
+        color:white;
+        text-decoration: none;
+        font-size: 24px;
+    }
+    #welcome h2 {
+        font-size: 27px;
+    }
+    #welcome img {
+        width:50%;
+        opacity:90%;
+        display:block;
+        margin:1% auto;
+        border-radius: 50%;
+    }
+    #welcome p {
+        text-align: justify;
+        display:block;
+        margin:auto;
+        width:90%;
+    }
+    #body {
+        margin-top:15vh;
+        overflow:hidden;
+    }
+    #about {
+        text-align: justify;
+        display:block;
+        width: 90%;
+        margin:auto;
+    }
+    #about h2 {
+        text-align: left;
+    }
+    #about img {
+        width:90%;
+    }
+    .button {
+        width:70vw;
+    }
 }
-    
