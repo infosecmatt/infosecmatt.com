@@ -81,7 +81,7 @@ i:visited {
 }
 #header li {
     display: inline;
-    margin: .5% 1%;
+    margin: 2% 2%;
     text-align: center;
     font-size: 14px;
     letter-spacing: 1.5px;
@@ -129,9 +129,6 @@ i:visited {
     padding: 2vw;
     margin-top:20vh;
     overflow:hidden;
-}
-#welcome {
-    height:80vh;
 }
 #welcome h2 {
     font-family: 'Concert One', 'Noto Sans JP', Roboto, 'Arial', 'Open Sans', "Helvetica Neue", sans-serif;
@@ -257,16 +254,16 @@ i:visited {
 /*MOBILE*/
 @media screen and (max-width: 640px) {
     p {
-        font-size:15px;
+        font-size:18px;
     }
     i {
-        font-size:15px;
+        font-size:18px;
     }    
     a {
-        font-size:15px;
+        font-size:18px;
     }
     #header {
-        height:18vh;
+        height:20vh;
         font-size:14px;
         line-height: 4vh;
     }
@@ -287,10 +284,10 @@ i:visited {
         margin-bottom: 10px;
     }
     #header ul {
-        margin: 1% 0;
+        margin: 2% 0;
     }
     #header li {
-        margin: .5% 5%;
+        margin: 5% 5%;
     }
     #header li a i {
         color:white;
