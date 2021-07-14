@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Concert+One|Open+Sans|Noto+Sans+JP|Ubuntu|Roboto|Roboto+Mono|Source+Code+Pro&display=swap');
+/* default fonts */
+body {
+    font-family: 'Noto Sans JP', Roboto, 'Arial', 'Open Sans', "Helvetica Neue", sans-serif;
+    letter-spacing: .1em;
+    background-color: rgb(240, 255, 248);
+    padding:2%;
+    font-size: 16px;
+}
+
+p {
+    font-size: 1em;
+}
+a {
+    font-size: 1em;
+    color:rgb(60, 21, 151);
+    text-decoration: none;
+}
+a:hover {
+    color:rgb(91, 32, 228)
+}
+
+/* title animation */
+@keyframes caret {
+    50% {color: black;}
+}
+#animation {
+    display: inline-block;
+}
+#animation span {
+    color: rgb(240, 255, 248);
+    animation: caret 1.2s steps(1, end) infinite;
+}
+
+/* title */
+#title a {
+    color:black;
+}
+#title a:hover {
+    color: black;
+}
+#title a:visited {
+    color:black;
+}
+h1 {
+    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 6em;
+}
+
+/* links */
+
+#links p {
+    font-size: 2em;
+}
+#contact p {
+    font-size: 2em;
+}
+
+  /*TABLET*/
+  @media screen and (min-width: 1025px) {
+    body {
+        margin: auto;
+        width: 66%;
+    }
+}

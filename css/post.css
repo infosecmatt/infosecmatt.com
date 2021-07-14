@@ -1,0 +1,39 @@
+h1 {
+    font-size: 2em;
+}
+h3 {
+    font-size: 1.75em;
+}
+
+img {
+    width:100%;
+}
+
+pre {
+    border-radius: 3px;
+    background-color: rgb(40, 40, 40);
+    color:white;
+    padding: 10px;
+    overflow: auto;
+    white-space: pre-line;
+}
+code {
+    font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    white-space: pre-line;
+    border-radius: 3px;
+    background-color: rgb(40, 40, 40);
+    color:white;
+    padding: 1px 7px;
+}
+pre code {
+    font-size: .75em;
+}
+
+#post-title {
+    color: rgb(168, 0, 42);
+    font-size: 2em;
+}
+#post-date {
+    color:gray;
+    font-size: .75em;
+}
