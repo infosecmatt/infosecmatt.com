@@ -2,7 +2,7 @@
 /* default fonts */
 body {
     font-family: 'Noto Sans JP', Roboto, 'Arial', 'Open Sans', "Helvetica Neue", sans-serif;
-    letter-spacing: .1em;
+    letter-spacing: .05em;
     background-color: rgb(240, 255, 248);
     padding:2%;
     font-size: 16px;
