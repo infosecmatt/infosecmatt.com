@@ -16,6 +16,7 @@ pre {
     padding: 10px;
     overflow: auto;
     white-space: pre-line;
+    padding: 1px 7px;
 }
 code {
     font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -23,7 +24,6 @@ code {
     border-radius: 3px;
     background-color: rgb(40, 40, 40);
     color:white;
-    padding: 1px 7px;
 }
 pre code {
     font-size: .75em;
