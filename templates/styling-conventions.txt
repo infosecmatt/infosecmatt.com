@@ -2,3 +2,7 @@ styling conventions:
 
 h1 id=post-title is for post title
 p id=post-date is for post date (smaller and lighter)
+
+highlight.js
+
+nmap styled as markdown
