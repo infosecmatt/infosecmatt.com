@@ -5,4 +5,6 @@ p id=post-date is for post date (smaller and lighter)
 
 highlight.js
 
+Supported languages: https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md
 nmap styled as markdown
+replace funky kali[here]kali character with @
