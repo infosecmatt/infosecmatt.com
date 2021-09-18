@@ -15,12 +15,10 @@ pre {
     color:#f6f8fa;
     padding: 10px;
     overflow: auto;
-    white-space: pre-line;
     padding: 1px 7px;
 }
 code {
     font-family: 'Source Code Pro', 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    white-space: pre-line;
     border-radius: 3px;
     background-color: #282c34;
     color:#f6f8fa;
