@@ -6,6 +6,9 @@
     <link href='../css/blog.css' media='screen' rel='stylesheet' type='text/css' />
     <link href='../css/post.css' media='screen' rel='stylesheet' type='text/css' />
     <title>Kali Containerized | matt johnson</title>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="../css/atom-one-dark-reasonable.min.css">
+    <script src="../js/highlight.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" type="image/png" href="../img/favicon.png">
     <meta name="description"
@@ -16,6 +19,7 @@
 </head>
 
 <body>
+    <script>hljs.highlightAll();</script>
     <div id="title">
         <a href="../index.html">
             <h1>mj&gt;<div id="animation"><span>_</span></div></h1>
@@ -94,20 +98,20 @@
         application called Docker Compose uses in order to take an image and deploy it as a container with specific
         runtime configurations applied. Now that we've established what these files are, let's take a look at them.</p>
     <p>First up, the Dockerfile:</p>
-    <pre><code>FROM kalilinux/kali-rolling:latest
- #kali-linux-default is a metapackage with all tools distributed on the base kali OS
- # xauth is needed for gui apps
- RUN apt-get update -y &amp;&amp; apt-get upgrade -y
- RUN DEBIAN_FRONTEND=noninteractive apt-get install -y kali-linux-default xauth iputils-ping gobuster python3-pip binutils
- RUN cd /opt
- RUN git clone https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git /opt/PEASS
- RUN git clone https://github.com/swisskyrepo/PayloadsAllTheThings.git /opt/PayloadsAllTheThings
- #this is required for Burpsuite to effectively run
- RUN echo 'alias burp="java -jar /usr/bin/burpsuite --user-config-file=/pentest/config/burpsuite-user-options.json --use-defaults --config-file=/pentest/config/burpsuite-project-options.json"' &gt;&gt; /root/.bashrc
- #support UTF encoding in tmux
- RUN echo 'alias tmux="tmux -u"' &gt;&gt; /root/.bashrc
- #hush kali login
- RUN touch /root/.hushlogin</code></pre>
+    <pre><code class="language-docker">FROM kalilinux/kali-rolling:latest
+#kali-linux-default is a metapackage with all tools distributed on the base kali OS
+# xauth is needed for gui apps
+RUN apt-get update -y &amp;&amp; apt-get upgrade -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y kali-linux-default xauth iputils-ping gobuster python3-pip binutils
+RUN cd /opt
+RUN git clone https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git /opt/PEASS
+RUN git clone https://github.com/swisskyrepo/PayloadsAllTheThings.git /opt/PayloadsAllTheThings
+#this is required for Burpsuite to effectively run
+RUN echo 'alias burp="java -jar /usr/bin/burpsuite --user-config-file=/pentest/config/burpsuite-user-options.json --use-defaults --config-file=/pentest/config/burpsuite-project-options.json"' &gt;&gt; /root/.bashrc
+#support UTF encoding in tmux
+RUN echo 'alias tmux="tmux -u"' &gt;&gt; /root/.bashrc
+#hush kali login
+RUN touch /root/.hushlogin</code></pre>
     <p>This file starts off by defining which base image it will build its image off of. In order to ensure that the
         custom container uses the most up-to-date version of Kali, it pulls from the base Kali Docker image. Worth
         noting that the Kali image maintained by Offensive Security is so minimal that it is borderline useless (which
@@ -132,20 +136,20 @@
         tools.</p>
     <p>Next up, the Docker Compose file:</p>
     <pre><code>version: '3.3'
- services:
- pentesting:
- hostname: kali
- environment:
- - DISPLAY
- volumes:
- - "${XAUTHORITY}:/root/.Xauthority:ro"
- - /tmp/.X11-unix
- - /pentest:/pentest
- - "${HOME}/.tmux.conf:/root/.tmux.conf:ro"
- network_mode: host
- image: infosecmatt/kali-pentesting
- stdin_open: true
- tty: true</code></pre>
+services:
+pentesting:
+hostname: kali
+environment:
+- DISPLAY
+volumes:
+- "${XAUTHORITY}:/root/.Xauthority:ro"
+- /tmp/.X11-unix
+- /pentest:/pentest
+- "${HOME}/.tmux.conf:/root/.tmux.conf:ro"
+network_mode: host
+image: infosecmatt/kali-pentesting
+stdin_open: true
+tty: true</code></pre>
     <p>This file is also simple. You can see that the the compose version file is 3.3. That line is there simply to tell
         Docker Compose how to interpret the file. I set the hostname to <code>kali</code> for aesthetic purposes. In
         order to get the GUI ability to work, I had to do a few things. First, I made it so that the host
@@ -169,15 +173,14 @@
     <p>As with all things in IT, functionality should be carefully balanced against security. Everyone's threat model
         and risk tolerance will be different, but I'd like to discuss some best practices when using my penetration
         testing container:</p>
-    <pre><code>1. Host network hardening: Given that the container shares a common networking stack with the host OS, it is critical that the host OS itself is sufficiently hardened. While it's unlikely that a malicious actor would be able to compromise the container, it is a possibility that should be accounted for. This means that there should be as few services running on the host as is necessary. On my host OS, the only running service I have that is accessible by the container is DNS.
- 2. Shared volumes: This probably goes without saying, but any shared volumes are a two way street. The host can read what the container writes and vice versa. The container operates within an entirely separate namespace except for what access you choose to give it.
- 3. Container privileges: It is possible to run containers with granular permissions. This is divergent from the typical perception that a process runs within either a privileged or unprivileged context. I have deliberately not assigned any special privileges, and thus far it has not caused any issues. I would caution against assigning privileges without fully understand the implications, as they can expose attack vectors that may compromise the security of the host image. Special attention should be paid to any permissions related to the Docker socket. With access to this socket, a user could effectively take over the host system.
- 4. When in doubt, build from source. You don't have to trust me, I'm just a random guy on the internet. I've made the Dockerfile and docker-compose file freely available for auditing, modification, and building from source.
- 5. Some useful commands related to the note above:
- - Build from source: docker build -f PATH/TO/Dockerfile
- - Start a container: docker-compose -f PATH/TO/docker-compose.yml run pentesting bash
- - Remove a container: docker-compose -f PATH/TO/docker-compose.yml rm
- </code></pre>
+    <pre><code class="language-plaintext">1. Host network hardening: Given that the container shares a common networking stack with the host OS, it is critical that the host OS itself is sufficiently hardened. While it's unlikely that a malicious actor would be able to compromise the container, it is a possibility that should be accounted for. This means that there should be as few services running on the host as is necessary. On my host OS, the only running service I have that is accessible by the container is DNS.
+2. Shared volumes: This probably goes without saying, but any shared volumes are a two way street. The host can read what the container writes and vice versa. The container operates within an entirely separate namespace except for what access you choose to give it.
+3. Container privileges: It is possible to run containers with granular permissions. This is divergent from the typical perception that a process runs within either a privileged or unprivileged context. I have deliberately not assigned any special privileges, and thus far it has not caused any issues. I would caution against assigning privileges without fully understand the implications, as they can expose attack vectors that may compromise the security of the host image. Special attention should be paid to any permissions related to the Docker socket. With access to this socket, a user could effectively take over the host system.
+4. When in doubt, build from source. You don't have to trust me, I'm just a random guy on the internet. I've made the Dockerfile and docker-compose file freely available for auditing, modification, and building from source.
+5. Some useful commands related to the note above:
+    - Build from source: docker build -f PATH/TO/Dockerfile
+    - Start a container: docker-compose -f PATH/TO/docker-compose.yml run pentesting bash
+    - Remove a container: docker-compose -f PATH/TO/docker-compose.yml rm </code></pre>
     <p>For additional reading refer to the following sources: <a href="https://docs.docker.com/network/host/">[A]</a> <a
             href="https://docs.docker.com/engine/security/">[B]</a></p>
     <br />
