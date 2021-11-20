@@ -24,11 +24,6 @@
 - Replace funky `kali*kali` terminal character with `@`
 - Ensure that all code blocks are assigned a `highlight.js` class
 - Run post through Grammarly for typos or poorly-worded sentences
-- Replace the following characters with their HTML-encoded equivalents in code blocks:
-    - \& --\> \&amp;
-    - \< --\> \&lt;
-    - \> --\> \&gt;
-    - \' --\> \&apos;
-    - \" --\> \&quot;
+- Escape sensitive HTML characters using [this website](https://www.freeformatter.com/html-escape.html)
 - Add blog post title to `blog.html`
 - Update publishing date 
