@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href='../../../../css/style.css' media='screen' rel='stylesheet' type='text/css' />
+    <link href='../../../../css/blog.css' media='screen' rel='stylesheet' type='text/css' />
+    <link href='../../../../css/post.css' media='screen' rel='stylesheet' type='text/css' />
+    <title>HTB: Frolic Writeup | matt johnson</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/png" href="../../../../img/favicon.png">
+    <meta name="description"
+        content="Here's how to solve HTB's Frolic.">
+    <meta name="keywords"
+        content="matt johnson, matt, johnson, cybersecurity, consultant, freelance, penetration testing, governance, nist, mitre, blog, hacking, ctf, hackthebox, security, infosec, resume, portfolio, tamu, tech">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div id="title">
+        <a href="../../../../index.html">
+            <h1>mj&gt;<div id="animation"><span>_</span></div></h1>
+        </a>
+    </div>
+    <!-- old post -->
+    <h1 id="post-title">HTB: Frolic Writeup</h1>
+    <p id="post-date">2020-04-06</p>
+    <div>
+        <h3>High-Level Information</h3>
+        <p>Machine Name: Frolic</p>
+        <p>IP Address: 10.10.10.111</p>
+        <p>Difficulty: Medium</p>
+        <p>Summary: HackTheBox's Frolic was a machine that, given sufficient patience and enough enumeration, was
+            relatively easy to get a foothold on via the vulnerable PlaySMS web application. The application is
+            discovered by following an increasingly cryptic trail of hints. Once on the box, internal enumeration shows
+            that there is an SUID program called 'rop' in a folder accessible by the user 'www-data'. In order to get a
+            root shell, one has to use a ROP attack against the vulnerable strcpy() method within this program.</p>
+        <p>Tools Used: Nmap, Gobuster, Ook! Interpreter, Brainfuck Interpreter, Metasploit, gdb, ldd</p>
+    </div>
+    <div>
+        <h3>Initial Foothold</h3>
+        <img src="../../../../img/posts/frolic/nmap.png" alt="" />
+        <p>I attempted to enumerate SMB and see if there was any useful information, but there was nothing to see.
+            Likewise with the Node-RED server. The Nginx server on port 9999 was interesting, however. Visiting
+            http://10.10.10.111:9999/ showed only the default Nginx page, but enumerating directories with gobuster led
+            to some discoveries:</p>
+        <img src="../../../../img/posts/frolic/gobuster.png" alt="" />
+        <p>The /backup directory gave me a set of credentials, 'admin:imnothuman', but they didn't give me access to any
+            services. The /dev directory did not initially appear useful, but running a gobuster scan against it
+            revealed a hidden service:</p>
+        <img src="../../../../img/posts/frolic/gobuster-dev.png" alt="" /> <img src="../../../../img/posts/frolic/dev-backup-folder.png"
+            alt="" /> <img src="../../../../img/posts/frolic/playsms-interface.png" alt="" />
+        <p>Revisiting the initial gobuster scan, the /admin directory redirected to a login panel. I was able to find
+            credentials to gain access within the source code:</p>
+        <img src="../../../../img/posts/frolic/admin-panel-source.png" alt="" /> <img src="../../../../img/posts/frolic/admin-success.png"
+            alt="" />
+        <p>Upon further research, I determined that this seemingly random noise was an encoded, esoteric language called
+            Ook! Using a decoder found online, I learned that it pointed to another hidden directory:</p>
+        <img src="../../../../img/posts/frolic/ook-decoder.png" alt="" /> <img src="../../../../img/posts/frolic/ook-link.png" alt="" />
+        <p>Assuming this was base64, I decoded it on my machine and ran 'file' against it, which demonstrated that it
+            was a password-protected .zip file. The password was simply 'password'. Within the decompressed .zip file
+            was the file 'index.php'. This file was encoded three times, first in hex, then in base64, and lastly in
+            Brainfuck, which is similar to Ook!</p>
+        <img src="../../../../img/posts/frolic/zip-decompress.png" alt="" /> <img
+            src="../../../../img/posts/frolic/index-php-to-brainfuck.png" alt="" /> <img
+            src="../../../../img/posts/frolic/brainfuck-decoder.png" alt="" />
+        <p>The resulting string 'idkwhatispass' turned out to be the password needed to gain access to PlaySMS. From
+            here, I used Searchsploit to find applicable vulnerabilities. The exploit I ended up using was an
+            authenticated RCE tracked under CVE-2017-9101. Ordinarily, I try to avoid using Metasploit, but this time I
+            happened to use it.</p>
+        <img src="../../../../img/posts/frolic/msf-success.png" alt="" />
+        <p>With a foothold on the system, it was time to focus on escalating privileges.</p>
+    </div>
+    <div>
+        <h3>Privilege Escalation</h3>
+        <p>While doing some initial reconnaissance on the machine, I was able to discover an SUID binary called 'rop'.
+            The program was designed to take a user argument and repeat it. Stress-testing the application revealed an
+            inability to handle strings with 52 bytes or more. Inspecting the binary revealed that the program was
+            likely using strcpy(), an old and dangerous function in C.</p>
+        <img src="../../../../img/posts/frolic/rop-source-inspect.png" alt="" />
+        <p>In order to get a root shell, I needed to craft a payload that would overwrite memory in a way that would run
+            a system call to '/bin/sh'. For the payload, I would need to know:</p>
+        <p>1. The length of the buffer.</p>
+        <p>2. The address in memory of the system() function</p>
+        <p>3. The address in memory of the exit() function</p>
+        <p>4. The disk address of the library used by the program.</p>
+        <p>5. The offset of /bin/sh within the previously mentioned library.</p>
+        <p>Already knowing the length of the buffer, the images below depict the rest of the steps needed to perform
+            this exploit:</p>
+        <img src="../../../../img/posts/frolic/gdb-system.png" alt="" /> <img src="../../../../img/posts/frolic/gdb-exit.png" alt="" />
+        <img src="../../../../img/posts/frolic/ldd-libc.png" alt="" /> <img src="../../../../img/posts/frolic/ldd-binsh.png" alt="" />
+        <p>Running the program using this custom payload grants a root shell:</p>
+        <img src="../../../../img/posts/frolic/root.png" alt="" />
+    </div>
+    <br />
+    <br />
+    <hr />
+    <p>As always, feedback is greatly appreciated. If you have any questions or comments, feel free to email me at <a
+            href="mailto:me@infosecmatt.com">me@infosecmatt.com</a>.</p>
+    </div>
+</body>
