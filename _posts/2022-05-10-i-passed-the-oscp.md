@@ -2,6 +2,8 @@
 layout: post.template
 title: "I Passed the OSCP with a Perfect* Score"
 categories: certifications
+description: "Well, it was close enough. This blog post describes how I prepared for the OSCP, the materials I used, the lessons I learned, and my advice to future test takers."
+keywords: "oscp, offsec, passed, methodology, prep"
 blogpost_title: "I Passed the OSCP with a Perfect* Score"
 date: 2022-05-10
 ---
