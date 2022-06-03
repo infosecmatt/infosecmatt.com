@@ -1,6 +1,8 @@
 ---
 layout: post.template
 title: "I Passed the OSCP with a Perfect* Score"
+description:
+keywords:
 categories: certifications
 blogpost_title: "I Passed the OSCP with a Perfect* Score"
 date: 2022-05-10
