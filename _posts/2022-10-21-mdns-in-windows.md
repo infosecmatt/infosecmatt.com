@@ -76,7 +76,7 @@ James also notes that it is necessary for a malicious DNS resolver to be on the 
 
 To demonstrate this, I'm going to present a very realistic scenario and demonstrate how mDNS is fundamentally no different from its predecessors in terms of risk. Imagine that your IT organization utilizes SMB for a department-wide file share which is automatically mounted upon startup using a batch script. Likewise, imagine that the department is spread across multiple offices, all of which are connected using Microsoft's DirectAccess. As is sometimes the case, DirectAccess leaves a user hanging in the "Connecting" state, meaning that the user cannot access the organizational DNS server or SMB share located in one of the other offices. As you've just logged on for the workday, the batch script runs in the background. It was not able to resolve your company's file server, mDNSisFun, and consequently couldn't reach the department share, FakeShare. A script kiddie who happened to be on your network is running Responder, a multicast name resolution poisoning tool, at the exact same time as this batch script is run. What happens?
 
-![Using Responder.py to capture an NTLM hash via mDNS poisoning](../img/posts/mDNSinWindows/01.png)
+![Using Responder.py to capture an NTLM hash via mDNS poisoning](/img/posts/mDNSinWindows/01.png)
 
 Without any prompt from the user or even an awareness that anything has happened, the employee has sent over their credentials. For the purpose of this demonstration, I have run the command graphically. This functions exactly the same as a batch startup script.
 
@@ -84,11 +84,11 @@ As James coyly mentions in his blog post, there is a way to disable the mDNS res
 
 After disabling the mDNS resolver within the Windows DNSCache service, I reran the test and found that the broken batch script no longer leaked credentials.
 
-![After disabling mDNS in the registry, the previous attack does not return credentials](../img/posts/mDNSinWindows/02.png)
+![After disabling mDNS in the registry, the previous attack does not return credentials](/img/posts/mDNSinWindows/02.png)
 
 Now, I did have one additional outstanding question related to how mDNS would affect corporate Active Directory environments. Under ordinary circumstances, mDNS is weird in that it relies on the ".local" TLD as an inherent part of its name resolution process. Additionally, a commonality between the penetration test I performed, Andreas Finstad's blog post, and the test I performed for this blog post is that all environments use that same ".local" TLD for their Active Directory domain name. Given mDNS' affinity for the TLD, I wanted to see if this issue was limited to domains that use it. I went through the somewhat arduous process of changing my test environment's domain from ‘FUNCORP.local' to ‘FUNCORP.com' using [RebelAdmin's helpful blog post](https://www.rebeladmin.com/2015/05/step-by-step-guide-to-rename-active-directory-domain-name/), re-enabled mDNS on my client machine, and attempted to once again mount the nonexistent mDNS share.
 
-![After changing my TLD to ".com," mDNS poisoning doesn't seem to work](../img/posts/mDNSinWindows/03.png)
+![After changing my TLD to ".com," mDNS poisoning doesn't seem to work](/img/posts/mDNSinWindows/03.png)
 
 This time, nothing happened. As a result, I believe that this vulnerability is likely to only affect organizations that use the ".local" TLD. The issue is that many organizations do use the ".local" TLD for the internal Active Directory domains. Even the most masochistic of IT administrators don't spend their nights pouring over IETF RFCs looking for obscure ways their corporate domain names might conflict with some protocol they've likely never heard of, and ".local" seems appropriate for an internal network.
 
@@ -98,13 +98,13 @@ The question then remains, what advice should we reasonably give these unfortuna
 
 James' article claims that mDNS should not be disabled via the registry as many applications including Microsoft Teams, Edge, and Google Chrome have and use their own implementation of mDNS. Simply disabling the mDNS resolution component of the DNSCache service would not eradicate the protocol from the network. I first wanted to test how Edge and Chrome respond to a request to a fake ".local" site with mDNS enabled in the registry settings, and the results were interesting. Worth noting that for this testing I reverted my Active Directory domain back to "funcorp.local."
 
-![with a ".local" domain and mDNS enabled, mDNS poisoning works on Microsoft Edge](../img/posts/mDNSinWindows/04.png)
-![with a ".local" domain and mDNS enabled, mDNS poisoning works on Google Chrome](../img/posts/mDNSinWindows/05.png)
+![with a ".local" domain and mDNS enabled, mDNS poisoning works on Microsoft Edge](/img/posts/mDNSinWindows/04.png)
+![with a ".local" domain and mDNS enabled, mDNS poisoning works on Google Chrome](/img/posts/mDNSinWindows/05.png)
 
 mDNS is certainly doing something here. However, it does not automatically send credentials as was the case with mounting the SMB share. It prompts a user for credentials, which is going to be subject to both scrutiny and error by the end user. This is still not an ideal situation as a user could be attempting to visit a valid intranet website and not think anything of this authentication request. So, what happens if you disable mDNS in the registry?
 
-![with a ".local" domain and mDNS disabled, mDNS poisoning doesn't work on Microsoft Edge](../img/posts/mDNSinWindows/06.png)
-![with a ".local" domain and mDNS disabled, mDNS poisoning doesn't work on Google Chrome](../img/posts/mDNSinWindows/07.png)
+![with a ".local" domain and mDNS disabled, mDNS poisoning doesn't work on Microsoft Edge](/img/posts/mDNSinWindows/06.png)
+![with a ".local" domain and mDNS disabled, mDNS poisoning doesn't work on Google Chrome](/img/posts/mDNSinWindows/07.png)
 
 At least for Edge and Chrome, it appears that simply disabling mDNS resolution for the DNSCache service is enough to neutralize this attack. I wasn't able to conduct this test for Teams, but I ran the commands from James' blog post on two different machines running Teams and it doesn't seem to run its own implementation. I likewise couldn't find any documentation stating as much, and Microsoft does not list UDP port 5353 as a requirement for Teams. I am happy to be corrected on any of this though.
 
@@ -114,20 +114,20 @@ There's another issue with strictly relying on firewalls to secure multicast tra
 
 Microsoft does not recommend that you disable outbound mDNS. Their precise recommendation is that to completely disable mDNS within the environment, you should disable the "mDNS (UDP-In)" rules for all profiles within Defender Firewall. Here's a sample of how those firewall rules look:
 
-![The Defender Firewall rules that Microsoft recommends disabling to block mDNS](../img/posts/mDNSinWindows/08.png)
+![The Defender Firewall rules that Microsoft recommends disabling to block mDNS](/img/posts/mDNSinWindows/08.png)
 
 If you're very clever you might have already noticed a potential problem. Disabling these rules will effectively shut down mDNS as a tool for discovering your office's local Fire TV stick, but it arguably does nothing to defend against the attacks demonstrated in this blog post. To demonstrate, I have disabled all of these rules and reran the previous attack:
 
-![Disabling mDNS in the firewall per Microsoft's recommendation still allows for poisoning attacks](../img/posts/mDNSinWindows/09.png)
-![Responder still grabs the hashes](../img/posts/mDNSinWindows/10.png)
+![Disabling mDNS in the firewall per Microsoft's recommendation still allows for poisoning attacks](/img/posts/mDNSinWindows/09.png)
+![Responder still grabs the hashes](/img/posts/mDNSinWindows/10.png)
 
 Furthermore, disabling these inbound rules still doesn't totally preclude the possibility of running an mDNS poisoner on a workstation (e.g., after gaining access via phishing). Using Kevin Robertson's Inveigh I was successfully able to poison mDNS requests despite having all recommended inbound rules disabled:
 
-![If you use Inveigh, you can still run an mDNS poisoning attack on a machine with the Defender Firewall rules configured per Microsoft instructions](../img/posts/mDNSinWindows/11.png)
+![If you use Inveigh, you can still run an mDNS poisoning attack on a machine with the Defender Firewall rules configured per Microsoft instructions](/img/posts/mDNSinWindows/11.png)
 
 This is because those inbound firewall rules apply only to svchost, which in this context is the DNSCache service I mentioned earlier:
 
-![the mDNS (UDP-In) firewall rule only applies to svchost.exe](../img/posts/mDNSinWindows/12.png)
+![the mDNS (UDP-In) firewall rule only applies to svchost.exe](/img/posts/mDNSinWindows/12.png)
 
 All of this was done in the service of demonstrating how Microsoft's recommendations for securing mDNS aren't just wrong, they're contradictory. On one hand, they recommend against disabling mDNS via the registry as that only disables the mDNS resolver within the DNSCache service itself, but on the other hand, their recommendation for disabling it via Defender Firewall does the exact same thing and fails to protect against the biggest threat the protocol poses.
 
