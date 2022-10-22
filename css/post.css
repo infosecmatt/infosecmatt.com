@@ -4,7 +4,9 @@ h1 {
 h3 {
     font-size: 1.75em;
 }
-
+ul li {
+    font-size: 1em;
+}
 img {
     width:100%;
 }

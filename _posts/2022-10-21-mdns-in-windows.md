@@ -149,9 +149,9 @@ I think we took our eye off the punch bowl.
 
 ### Additional References and Sources
 - [mDNS in the Enterprise - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/networking-blog/mdns-in-the-enterprise/ba-p/3275777)
-- [Microsoft TCP/IP Host Name Resolution Order](https://support.microsoft.com/en-us/topic/microsoft-tcp-ip-host-name-resolution-order-dae00cc9-7e9c-c0cc-8360-477b99cb978a)
-- [Windows Name Resolution | Microsoft Learn](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-wpo/f00add7f-a321-4a5f-a5d8-1748e748cd44)
-- [Selecting the Forest Root Domain | Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/selecting-the-forest-root-domain)
-- [Printer discovery with Mobility Print - which method is best for you? | PaperCut](https://www.papercut.com/help/manuals/mobility-print/how-it-works/printer-discovery/#mdns-discovery)
-- [mDNS and DNS-SD slowly making their way into Windows 10 | Ctrl blog](https://www.ctrl.blog/entry/windows-mdns-dnssd.html)
+- [Microsoft TCP\/IP Host Name Resolution Order](https://support.microsoft.com/en-us/topic/microsoft-tcp-ip-host-name-resolution-order-dae00cc9-7e9c-c0cc-8360-477b99cb978a)
+- [Windows Name Resolution \| Microsoft Learn](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-wpo/f00add7f-a321-4a5f-a5d8-1748e748cd44)
+- [Selecting the Forest Root Domain \| Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/selecting-the-forest-root-domain)
+- [Printer discovery with Mobility Print - which method is best for you? \| PaperCut](https://www.papercut.com/help/manuals/mobility-print/how-it-works/printer-discovery/#mdns-discovery)
+- [mDNS and DNS-SD slowly making their way into Windows 10 \| Ctrl blog](https://www.ctrl.blog/entry/windows-mdns-dnssd.html)
 - [Chrome browser - multicast DNS support (google.com)](https://groups.google.com/a/chromium.org/g/chromium-discuss/c/6b0vVreNTvQ?pli=1)
