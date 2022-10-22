@@ -25,7 +25,7 @@ All of these old vulnerable components aren't random though, they still exist be
 But that's not the end of the story. As any security consultant will tell you, just because some software or protocol is deprecated does not mean that it stops being used. On June 27, 2017, a massive cyberattack was launched against Ukraine using a variant of the Petya malware. It propagated via the aforementioned EternalBlue exploit, and due to the enduring prevalence of SMBv1, which had been deprecated for four years at that point, spread widely to organizations and countries around the world, including many within the United States, Germany, France, and the United Kingdom. While I could find no official estimate of the total damage, it has been informally estimated at $10 billion. Companies like Maersk, Mondelez, and Merck were all hit extremely hard and had estimated losses in the hundreds of millions of dollars. The perpetrators were notoriously discriminatory against companies starting with the letter "M". This is the other edge of the sword. Features and functionalities that are implemented today won't simply go away because much of the IT world depends on them not to. This aphorism means that any functionality put in place needs to be done so thoughtfully with security in mind and subject to lots of testing before it becomes a widespread and indispensable thing. That's why Microsoft's latest decision is, frankly, baffling.
 
 ## Part 2: Wait, Microsoft actually did that?
-Normally I wouldn't be terribly quick to identify the evolutionary changes Microsoft makes to Windows. More often than not, I will only hear about the things Microsoft has done via security news sources or when someone much smarter than me plays around with a Windows feature and produces content about how it works or how to abuse it. You might imagine my surprise when I was conducting a penetration test and I started getting Windows machines sending me mDNS queries followed by NTLM challenge-responses (you can crack those to get passwords, for those who reading who aren't familiar with this space). It's just not something you ever really see. Apple devices have used mDNS for multicast name resolution for a while and its issues are well known, but up until this moment, I had never realized that Windows even had an mDNS implementation.
+Normally I wouldn't be terribly quick to identify the evolutionary changes Microsoft makes to Windows. More often than not, I will only hear about the things Microsoft has done via security news sources or when someone much smarter than me plays around with a Windows feature and produces content about how it works or how to abuse it. You might imagine my surprise when I was conducting a penetration test and I started getting Windows machines sending me mDNS queries followed by NTLM challenge-responses (you can crack those to get passwords, for those reading who aren't familiar with this space). It's just not something you ever really see. Apple devices have used mDNS for multicast name resolution for a while and its issues are well known, but up until this moment, I had never realized that Windows even had an mDNS implementation.
 
 After a bit of googling, I learned that Microsoft has been quietly introducing the protocol on its machines for years and in April 2022 publicly announced that it ultimately planned to make mDNS the only multicast name resolution protocol enabled by default on Windows. Hardly anyone has written about this, much less people in the infosec sphere. In fact, almost all of the sparse information out there simply announces that this will be a thing. Seemingly very little analysis or scrutiny of the decision exists as of October 2022, and in my opinion, the decision certainly deserves a degree of scrutiny. I figured this is a good opportunity to finally contribute an actual original thought to the community at large.
 
@@ -45,6 +45,7 @@ To determine whether mDNS is broadly useful within corporate environments such t
  - Does mDNS solve a problem that broadly exists within corporate environments?
  - Does mDNS introduce or perpetuate security flaws that expose organizations to risk?
  - Do Microsoft's recommended strategies for securing mDNS hold water?
+
 In doing so, I am going to answer some practical questions that James presents in his blog post as well as some that I anticipate readers may have as I go through these points.
 
 ### So, does mDNS solve a problem?
@@ -56,6 +57,7 @@ mDNS is yet another implementation of the classic multicast name resolution prot
  - Can another device on my local subnet help me find the host?
      - LLMNR is used first
      - NBT-NS is used as a backup
+
 As far as I can tell through my readings, Microsoft plans for mDNS to eventually sit on top of LLMNR in the name resolution process, at least for devices ending in the ".local" TLD. An important part of determining whether this protocol will be broadly useful in a corporate environment is to consider its use cases.
 
 To state the obvious, it only works on a local subnet. So many of the purported benefits of the protocol (printer discovery, wireless displays, Chromecasts, etc.) will only extend to you insofar as you don't keep those devices segmented. One could argue that devices of that nature should be, but that may be subject to debate. In many corporate environments, you will see devices such as printers and conference room equipment on their own VLANs, so mDNS isn't really going to help all that much for discovery in those cases. 
@@ -99,11 +101,13 @@ The question then remains, what advice should we reasonably give these unfortuna
 James' article claims that mDNS should not be disabled via the registry as many applications including Microsoft Teams, Edge, and Google Chrome have and use their own implementation of mDNS. Simply disabling the mDNS resolution component of the DNSCache service would not eradicate the protocol from the network. I first wanted to test how Edge and Chrome respond to a request to a fake ".local" site with mDNS enabled in the registry settings, and the results were interesting. Worth noting that for this testing I reverted my Active Directory domain back to "funcorp.local."
 
 ![with a ".local" domain and mDNS enabled, mDNS poisoning works on Microsoft Edge](/img/posts/mDNSinWindows/04.png)
+
 ![with a ".local" domain and mDNS enabled, mDNS poisoning works on Google Chrome](/img/posts/mDNSinWindows/05.png)
 
 mDNS is certainly doing something here. However, it does not automatically send credentials as was the case with mounting the SMB share. It prompts a user for credentials, which is going to be subject to both scrutiny and error by the end user. This is still not an ideal situation as a user could be attempting to visit a valid intranet website and not think anything of this authentication request. So, what happens if you disable mDNS in the registry?
 
 ![with a ".local" domain and mDNS disabled, mDNS poisoning doesn't work on Microsoft Edge](/img/posts/mDNSinWindows/06.png)
+
 ![with a ".local" domain and mDNS disabled, mDNS poisoning doesn't work on Google Chrome](/img/posts/mDNSinWindows/07.png)
 
 At least for Edge and Chrome, it appears that simply disabling mDNS resolution for the DNSCache service is enough to neutralize this attack. I wasn't able to conduct this test for Teams, but I ran the commands from James' blog post on two different machines running Teams and it doesn't seem to run its own implementation. I likewise couldn't find any documentation stating as much, and Microsoft does not list UDP port 5353 as a requirement for Teams. I am happy to be corrected on any of this though.
@@ -145,7 +149,11 @@ Even more problematic, however, is that even with our knowledge of the last 30 y
 
 Infosec may be the teacher watching over the punch bowl at the school dance, but it's only that way because, much like teenagers at a school dance, the tech world can make some very questionable decisions when the party gets going. 
 
-I think we took our eye off the punch bowl.
+We took our eye off the punch bowl.
+
+## Addendum
+
+It's very possible that some of the information in this blog post is wrong. I have tried my best to consider and preempt different criticisms or counterpoints, but if there's anything that I haven't addressed in this blog post I'd be happy to hear about it and update this blog post accordingly. You can contact me at [me@infosecmatt.com](mailto:me@infosecmatt.com) or on [LinkedIn](https://www.linkedin.com/in/johnsonmatte/).
 
 ### Additional References and Sources
 - [mDNS in the Enterprise - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/networking-blog/mdns-in-the-enterprise/ba-p/3275777)
