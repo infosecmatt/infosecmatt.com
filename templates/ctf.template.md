@@ -10,6 +10,10 @@ machine_ip: 10.10.10.248
 machine_difficulty: Medium
 summary: "HackTheBox's Intelligence was a fascinating machine mirroring real-world logic flaws in web applications and Active Directory attack paths. Additionally, one goes from unprivileged user all the way to root without ever gaining remote code execution on the machine itself, demonstrating the risk of information disclosure even in absence of clear attack vectors."
 tools_used: "Nmap, dig, smbclient, cURL, wget, pdfinfo, crackmapexec, smbmap, dnstool.py, Responder, john, ldapdomaindump, Impacket suite, gMSADumper"
+sitemap:
+  lastmod: 2018-05-25
+  priority: 0.3
+  changefreq: 'weekly'
 ---
 ### Initial Access
 To determine the active services running on the machine, I began by running an Nmap scan:

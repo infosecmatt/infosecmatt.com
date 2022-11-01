@@ -6,6 +6,10 @@ keywords:
 categories: certifications
 blogpost_title: "I Passed the OSCP with a Perfect* Score"
 date: 2022-05-10
+sitemap:
+  lastmod: 2018-05-25
+  priority: 0.3
+  changefreq: 'weekly'
 ---
 After three and a half months of intensive preparation and a lack of proper self-care, I took and passed the Offensive Security Certified Professional exam. More than that, I got a perfect score. Or at least, kinda. I did pass the exam with 100 points, however 10 of those points were a result of the lab report. As for the exam itself, I owned the Active Directory domain, two of the standalone machines, and got local access to the third. A week later, I still have no idea what the privilege escalation vector was on that last machine and it does bug me. Nonetheless, I am extremely proud of the amount of work I put in and would like to share my experience both to reflect on these past months as well as to attempt to provide some guidance to other potential test-takers out there.
 
