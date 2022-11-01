@@ -4,3 +4,5 @@ kramdown:
 
 plugins:
   - jekyll-seo-tag
+
+exclude: ['templates', 'docs']
