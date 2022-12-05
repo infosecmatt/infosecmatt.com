@@ -1,6 +1,6 @@
 ---
 layout: post.template
-title: "mDNS: history rhymes"
+title: "Microsoft's foray into mDNS is introducing new security issues"
 categories: security
 description: "Microsoft has decided to go against its better judgement and enable mDNS on Windows by default. Since nobody else seems to have analyzed why this is such as bad decision, I decided to do so. It's not great."
 keywords: "mdns, poisoning, hacking, microsoft, windows, demonstration, cybersecurity, multicast, vulnerability, analysis"
