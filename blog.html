@@ -23,6 +23,12 @@
             </h1>
         </a>
     </div>
+    <h3>general it stuff</h3>
+    <ul>
+	{% for post in site.categories['itstuff'] %}
+        <li><a href="{{ post.url }}">{{ post.title }} ({{ post.date | date: "%Y" }})</a></li>
+        {% endfor %}
+    </ul>
     <h3>security musings</h3>
     <ul>
 	{% for post in site.categories['security'] %}
